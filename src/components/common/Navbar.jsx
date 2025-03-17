@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
-const Navbar = ({ isLoggedIn, userType }) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
   
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src="/logo.svg" alt="Drivelyph" className="navbar-logo-img" />
+          <img src='/logo.svg' alt="Drivelyph" className="navbar-logo-img" />
           <span className="navbar-logo-text">Drivelyph</span>
         </Link>
         
@@ -26,13 +28,13 @@ const Navbar = ({ isLoggedIn, userType }) => {
             <Link to="/how-it-works" className="navbar-link">How It Works</Link>
           </li>
           
-          {isLoggedIn && userType === 'owner' && (
+          {isAuthenticated && user?.user_type === 'owner' && (
             <li className="navbar-item">
               <Link to="/list-your-car" className="navbar-link">List Your Car</Link>
             </li>
           )}
           
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <>
               <li className="navbar-item">
                 <Link to="/bookings" className="navbar-link">My Bookings</Link>
@@ -44,14 +46,22 @@ const Navbar = ({ isLoggedIn, userType }) => {
                 </button>
                 <div className="dropdown-menu">
                   <Link to="/profile" className="dropdown-item">Profile</Link>
-                  {userType === 'owner' && (
+                  {user?.user_type === 'owner' && (
                     <Link to="/owner-dashboard" className="dropdown-item">Owner Dashboard</Link>
                   )}
-                  {userType === 'renter' && (
+                  {user?.user_type === 'renter' && (
                     <Link to="/renter-dashboard" className="dropdown-item">Renter Dashboard</Link>
                   )}
                   <Link to="/settings" className="dropdown-item">Settings</Link>
-                  <Link to="/logout" className="dropdown-item">Logout</Link>
+                  <button 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      logout();
+                    }} 
+                    className="dropdown-item"
+                  >
+                    Logout
+                  </button>
                 </div>
               </li>
             </>

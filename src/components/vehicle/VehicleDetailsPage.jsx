@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import VehicleGallery from './VehicleGallery';
-import BookingForm from '../components/booking/BookingForm';
+// import BookingForm from './components/booking/BookingForm';
+import BookingForm from '../../components/booking/BookingForm'
 import './VehicleDetailsPage.css';
 
 const VehicleDetailsPage = () => {
