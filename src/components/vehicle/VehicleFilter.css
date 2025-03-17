@@ -1,0 +1,253 @@
+.vehicle-filter {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+  }
+  
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .filter-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+  }
+  
+  .clear-filters-btn {
+    background: none;
+    border: none;
+    color: #FB9EC6;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .clear-filters-btn:hover {
+    color: #FBB4A5;
+  }
+  
+  .filter-section {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #DEE2E6;
+    padding-bottom: 1.5rem;
+  }
+  
+  .filter-section:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .filter-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+  }
+  
+  .filter-section-header i {
+    color: #ADB5BD;
+    transition: transform 0.3s;
+  }
+  
+  .filter-section-content {
+    padding-left: 0.5rem;
+  }
+  
+  /* Price Range Styles */
+  .price-range-slider {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    margin: 1.5rem 0;
+  }
+  
+  .range-slider-track {
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    background-color: #DEE2E6;
+    border-radius: 4px;
+  }
+  
+  .range-slider-fill {
+    position: absolute;
+    height: 8px;
+    background-color: #FB9EC6;
+    border-radius: 4px;
+  }
+  
+  .range-slider-thumb {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    z-index: 2;
+    -webkit-appearance: none;
+    pointer-events: none;
+    outline: none;
+    background: transparent;
+  }
+  
+  .range-slider-thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 2px solid #FB9EC6;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .range-slider-thumb::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 2px solid #FB9EC6;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .range-slider-thumb-left {
+    z-index: 3;
+  }
+  
+  .price-range-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  .price-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #DEE2E6;
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .price-currency {
+    color: #6C757D;
+    font-size: 0.875rem;
+    margin-right: 0.25rem;
+  }
+  
+  .price-input {
+    border: none;
+    width: 60px;
+    font-size: 0.875rem;
+    color: #495057;
+    outline: none;
+  }
+  
+  .price-range-separator {
+    color: #6C757D;
+    margin: 0 0.5rem;
+  }
+  
+  .price-period {
+    color: #6C757D;
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+  }
+  
+  /* Checkbox Styles */
+  .filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .filter-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .filter-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .filter-checkbox {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    background-color: #FFFFFF;
+    border: 1px solid #DEE2E6;
+    border-radius: 4px;
+    margin-right: 0.75rem;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .filter-option:hover .filter-checkbox {
+    border-color: #FB9EC6;
+  }
+  
+  .filter-option input:checked ~ .filter-checkbox {
+    background-color: #FB9EC6;
+    border-color: #FB9EC6;
+  }
+  
+  .filter-checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  .filter-option input:checked ~ .filter-checkbox:after {
+    display: block;
+  }
+  
+  .filter-option-label {
+    font-size: 0.875rem;
+    color: #495057;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .vehicle-filter {
+      max-width: 100%;
+    }
+    
+    .filter-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .filter-options {
+      grid-template-columns: 1fr;
+    }
+  }

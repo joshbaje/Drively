@@ -1,0 +1,74 @@
+.vehicle-search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #DEE2E6;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #FB9EC6;
+    box-shadow: 0 0 0 3px rgba(251, 158, 198, 0.25);
+  }
+  
+  .form-control::placeholder {
+    color: #ADB5BD;
+  }
+  
+  .search-button {
+    background-color: #FB9EC6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .search-button:hover {
+    background-color: #F883B2;
+  }
+  
+  .search-button i {
+    font-size: 1.125rem;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 576px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }

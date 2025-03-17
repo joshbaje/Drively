@@ -1,0 +1,358 @@
+/* Hero Section */
+.hero {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #FCFFC1 0%, #FFE893 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .hero-title {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+    color: #495057;
+    margin-bottom: 2rem;
+    max-width: 80%;
+  }
+  
+  .hero-search {
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    animation: floatAnimation 4s ease-in-out infinite;
+  }
+  
+  @keyframes floatAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  /* How It Works Section */
+  .how-it-works {
+    padding: 5rem 0;
+    background-color: #FFFFFF;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 3rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: #6C757D;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .step {
+    padding: 2rem;
+    background-color: #F8F9FA;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .step-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: #FCFFC1;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .step-icon img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .step-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+  
+  .step-description {
+    font-size: 0.875rem;
+    color: #6C757D;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  /* Featured Vehicles Section */
+  .featured-vehicles {
+    padding: 5rem 0;
+    background-color: #F8F9FA;
+  }
+  
+  .vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .view-all-link {
+    text-align: center;
+  }
+  
+  /* Testimonials Section */
+  .testimonials {
+    padding: 5rem 0;
+    background-color: #FFFFFF;
+    text-align: center;
+  }
+  
+  .testimonial-slider {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .testimonial {
+    padding: 2rem;
+    background-color: #F8F9FA;
+    border-radius: 12px;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
+  .testimonial-content {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #495057;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .testimonial-content::before {
+    content: '"';
+    font-size: 4rem;
+    color: #FFE893;
+    position: absolute;
+    top: -1.5rem;
+    left: -1.5rem;
+    font-family: Georgia, serif;
+    opacity: 0.5;
+  }
+  
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .testimonial-author-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .testimonial-author-name {
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+  }
+  
+  .testimonial-author-title {
+    font-size: 0.875rem;
+    color: #6C757D;
+    margin: 0;
+  }
+  
+  /* Become a Host Section */
+  .become-host {
+    padding: 5rem 0;
+    background-color: #FFE893;
+  }
+  
+  .become-host-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .become-host-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 1.5rem;
+  }
+  
+  .become-host-description {
+    font-size: 1.125rem;
+    color: #495057;
+    margin-bottom: 1.5rem;
+  }
+  
+  .become-host-benefits {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .become-host-benefits li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    font-weight: 500;
+  }
+  
+  .become-host-benefits li::before {
+    content: '✓';
+    color: #FB9EC6;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  
+  .become-host-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Download App Section */
+  .download-app {
+    padding: 5rem 0;
+    background-color: #FBB4A5;
+    color: #FFFFFF;
+  }
+  
+  .download-app-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .download-app-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 1.5rem;
+  }
+  
+  .download-app-description {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+  }
+  
+  .download-app-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .download-app-button {
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+  
+  .download-app-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .download-app-button img {
+    height: 50px;
+  }
+  
+  .download-app-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .hero .container,
+    .become-host-grid,
+    .download-app-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .hero-image {
+      order: -1;
+    }
+    
+    .vehicle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .steps {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+    
+    .vehicle-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+    }
+    
+    .download-app-buttons {
+      flex-direction: column;
+    }
+  }

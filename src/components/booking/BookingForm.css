@@ -1,0 +1,187 @@
+.booking-form-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  position: sticky;
+  top: 20px;
+}
+
+.booking-price {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.booking-price .price {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #000;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #FB9EC6; /* Pink from our color palette */
+  outline: none;
+}
+
+.form-group input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.insurance-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.insurance-option {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.insurance-option:hover {
+  border-color: #FFE893; /* Yellow from our color palette */
+  background-color: #FCFFC1; /* Light Yellow from our color palette */
+}
+
+.insurance-option.selected {
+  border-color: #FFE893; /* Yellow from our color palette */
+  background-color: #FCFFC1; /* Light Yellow from our color palette */
+  border-width: 2px;
+}
+
+.option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option-name {
+  font-weight: 600;
+}
+
+.option-price {
+  color: #666;
+}
+
+.booking-summary {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.booking-summary h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.summary-line.total {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.security-deposit-note {
+  font-size: 0.85rem;
+  color: #666;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.security-deposit-note i {
+  color: #FB9EC6; /* Pink from our color palette */
+  margin-top: 3px;
+}
+
+.booking-submit-btn {
+  background-color: #FB9EC6; /* Pink from our color palette */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.booking-submit-btn:hover {
+  background-color: #f586b4; /* Slightly darker pink */
+}
+
+.booking-policy-note {
+  font-size: 0.8rem;
+  text-align: center;
+  color: #777;
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .booking-form-container {
+    position: static;
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-dates {
+    grid-template-columns: 1fr;
+  }
+}

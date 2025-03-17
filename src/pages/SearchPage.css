@@ -1,0 +1,145 @@
+.search-page {
+    min-height: 100vh;
+  }
+  
+  .search-header {
+    background-color: #FFE893;
+    padding: 2rem 0;
+  }
+  
+  .search-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #212529;
+  }
+  
+  .search-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-results-section {
+    padding: 2rem 0 4rem;
+  }
+  
+  .search-results-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+  }
+  
+  .search-sidebar {
+    position: sticky;
+    top: 5rem;
+    height: fit-content;
+  }
+  
+  .search-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .results-count {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+  }
+  
+  .results-sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .results-sort label {
+    font-size: 0.875rem;
+    color: #6C757D;
+  }
+  
+  .sort-select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #DEE2E6;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: #495057;
+    background-color: #FFFFFF;
+  }
+  
+  .vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(251, 158, 198, 0.3);
+    border-top: 4px solid #FB9EC6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 3rem 0;
+    color: #6C757D;
+  }
+  
+  .no-results h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #212529;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 1200px) {
+    .vehicle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .search-results-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-sidebar {
+      position: static;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .vehicle-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-results-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }

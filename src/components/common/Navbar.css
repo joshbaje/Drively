@@ -1,0 +1,221 @@
+.navbar {
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #212529;
+}
+
+.navbar-logo-img {
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.navbar-logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navbar-item {
+  margin-left: 1rem;
+  position: relative;
+}
+
+.navbar-link {
+  color: #495057;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.navbar-link:hover {
+  color: #FB9EC6;
+  text-decoration: none;
+}
+
+.navbar-btn {
+  display: inline-block;
+  background-color: #FB9EC6;
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  transition: background-color 0.3s;
+}
+
+.navbar-btn:hover {
+  background-color: #FBB4A5;
+  text-decoration: none;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-toggle:after {
+  content: '';
+  display: inline-block;
+  margin-left: 0.25rem;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid currentColor;
+  vertical-align: middle;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.25rem;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+  z-index: 1001;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #495057;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #F8F9FA;
+  color: #FB9EC6;
+  text-decoration: none;
+}
+
+.navbar-menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.navbar-menu-toggle-icon {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background-color: #495057;
+}
+
+.navbar-menu-toggle-icon:before,
+.navbar-menu-toggle-icon:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #495057;
+  transition: transform 0.3s;
+}
+
+.navbar-menu-toggle-icon:before {
+  transform: translateY(-6px);
+}
+
+.navbar-menu-toggle-icon:after {
+  transform: translateY(6px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar-menu-toggle {
+    display: block;
+  }
+  
+  .navbar-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #FFFFFF;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+  }
+  
+  .navbar-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .navbar-item {
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+  
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    padding: 0;
+  }
+  
+  .dropdown-toggle:after {
+    margin-left: auto;
+  }
+}
