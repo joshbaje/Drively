@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-column">
             <div className="footer-logo">
-              <img src="/logo.svg" alt="Drivelyph" className="footer-logo-img" />
+              <img src="/public/logo.svg" alt="Drivelyph" className="footer-logo-img" />
               <span className="footer-logo-text">Drivelyph</span>
             </div>
             <p className="footer-description">
