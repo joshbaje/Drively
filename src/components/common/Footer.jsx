@@ -9,8 +9,8 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-column">
             <div className="footer-logo">
-              <img src="/public/logo.svg" alt="Drivelyph" className="footer-logo-img" />
-              <span className="footer-logo-text">Drivelyph</span>
+              <img src="/public/logo.svg" alt="Drively" className="footer-logo-img" />
+              <span className="footer-logo-text">Drively</span>
             </div>
             <p className="footer-description">
               The modern way to rent a car. Connect with car owners directly and
@@ -71,7 +71,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p className="copyright">&copy; {new Date().getFullYear()} Drivelyph. All rights reserved.</p>
+          <p className="copyright">&copy; {new Date().getFullYear()} Drively. All rights reserved.</p>
           <div className="payment-methods">
             <img src="/images/payment/visa.png" alt="Visa" />
             <img src="/images/payment/mastercard.png" alt="Mastercard" />

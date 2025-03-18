@@ -47,7 +47,7 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-header">
           <h1>Welcome Back</h1>
-          <p>Sign in to continue to Drivelyph</p>
+          <p>Sign in to continue to Drively</p>
         </div>
         
         {error && <div className="auth-error">{error}</div>}

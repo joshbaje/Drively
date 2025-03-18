@@ -75,7 +75,7 @@ const HomePage = () => {
           <div className="hero-content">
             <h1 className="hero-title">Find the perfect car for your next adventure</h1>
             <p className="hero-subtitle">
-              Drivelyph connects car owners with renters for a seamless rental experience.
+              Drively connects car owners with renters for a seamless rental experience.
               Choose from a variety of vehicles at competitive prices.
             </p>
             
@@ -93,7 +93,7 @@ const HomePage = () => {
       {/* How It Works Section */}
       <section className="how-it-works">
         <div className="container">
-          <h2 className="section-title">How Drivelyph Works</h2>
+          <h2 className="section-title">How Drively Works</h2>
           
           <div className="steps">
             <div className="step">
@@ -160,7 +160,7 @@ const HomePage = () => {
           <div className="testimonial-slider">
             <div className="testimonial">
               <div className="testimonial-content">
-                <p>"Drivelyph made my trip to Tagaytay so easy! The car was in pristine condition and the owner was very accommodating. Will definitely use again!"</p>
+                <p>"Drively made my trip to Tagaytay so easy! The car was in pristine condition and the owner was very accommodating. Will definitely use again!"</p>
               </div>
               <div className="testimonial-author">
                 <img src="/images/users/user-1.jpg" alt="User" className="testimonial-author-image" />
@@ -181,7 +181,7 @@ const HomePage = () => {
             <div className="become-host-content">
               <h2 className="become-host-title">Earn extra income by sharing your car</h2>
               <p className="become-host-description">
-                Turn your car into a source of income when you're not using it. With Drivelyph, 
+                Turn your car into a source of income when you're not using it. With Drively, 
                 you can list your vehicle on our secure platform and start earning right away.
               </p>
               <ul className="become-host-benefits">
@@ -204,7 +204,7 @@ const HomePage = () => {
         <div className="container">
           <div className="download-app-grid">
             <div className="download-app-content">
-              <h2 className="download-app-title">Take Drivelyph with you</h2>
+              <h2 className="download-app-title">Take Drively with you</h2>
               <p className="download-app-description">
                 Download our mobile app for a seamless experience on the go. Book cars, 
                 manage rentals, and stay connected with our community.
@@ -219,7 +219,7 @@ const HomePage = () => {
               </div>
             </div>
             <div className="download-app-image">
-              <img src="/images/mobile-app.png" alt="Drivelyph mobile app" />
+              <img src="/images/mobile-app.png" alt="Drively mobile app" />
             </div>
           </div>
         </div>

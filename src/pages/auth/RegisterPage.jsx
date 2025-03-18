@@ -121,7 +121,7 @@ const RegisterPage = () => {
       <div className="auth-container">
         <div className="auth-header">
           <h1>Create an Account</h1>
-          <p>Join Drivelyph to start renting or listing vehicles</p>
+          <p>Join Drively to start renting or listing vehicles</p>
         </div>
         
         {error && <div className="auth-error">{error}</div>}

@@ -141,7 +141,7 @@ Please note that the car is equipped with a GPS tracker for security purposes.`,
             },
             rating: 5,
             date: 'February 15, 2025',
-            comment: 'This was my first time using Drivelyph and I couldn\'t be happier. The car was in immaculate condition and drove so smoothly. John explained everything clearly and was very accommodating with our schedule.'
+            comment: 'This was my first time using Drively and I couldn\'t be happier. The car was in immaculate condition and drove so smoothly. John explained everything clearly and was very accommodating with our schedule.'
           }
         ],
         similarVehicles: [

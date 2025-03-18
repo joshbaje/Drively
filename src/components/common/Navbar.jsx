@@ -11,8 +11,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src='/logo.svg' alt="Drivelyph" className="navbar-logo-img" />
-          <span className="navbar-logo-text">Drivelyph</span>
+          <img src='/public/logo.svg' alt="Drively" className="navbar-logo-img" />
+          <span className="navbar-logo-text">Drively</span>
         </Link>
         
         <div className="navbar-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
