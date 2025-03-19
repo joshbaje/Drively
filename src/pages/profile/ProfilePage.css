@@ -1,0 +1,361 @@
+/* Reset and more specific ProfilePage.css */
+
+/* Main container */
+.profile-page {
+  background-color: #f8f9fa;
+  padding: 40px 0;
+  min-height: calc(100vh - 80px);
+}
+
+/* Profile grid layout */
+.profile-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.profile-grid {
+  display: grid !important;
+  grid-template-columns: 280px 1fr !important;
+  gap: 30px !important;
+  width: 100% !important;
+}
+
+/* Sidebar styles */
+.profile-sidebar {
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden !important;
+  height: fit-content !important;
+}
+
+.user-info {
+  padding: 25px !important;
+  text-align: center !important;
+  border-bottom: 1px solid #eee !important;
+}
+
+.user-avatar {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  margin: 0 auto 15px !important;
+  border: 3px solid #FB9EC6 !important;
+  background-color: #f0f0f0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.user-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.user-name {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  margin-bottom: 5px !important;
+  color: #333 !important;
+}
+
+.user-type {
+  display: inline-block !important;
+  background-color: #FB9EC6 !important;
+  color: white !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  padding: 3px 10px !important;
+  border-radius: 20px !important;
+  margin-bottom: 10px !important;
+}
+
+.user-email {
+  color: #666 !important;
+  font-size: 14px !important;
+  margin: 5px 0 !important;
+}
+
+.user-since {
+  font-size: 12px !important;
+  color: #888 !important;
+  margin-top: 5px !important;
+}
+
+/* Navigation sidebar */
+.profile-nav {
+  list-style-type: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.profile-nav-item {
+  border-bottom: 1px solid #eee !important;
+}
+
+.profile-nav-item:last-child {
+  border-bottom: none !important;
+}
+
+.profile-nav-link {
+  display: flex !important;
+  align-items: center !important;
+  padding: 15px 20px !important;
+  color: #333 !important;
+  text-decoration: none !important;
+  transition: all 0.3s !important;
+  background: none !important;
+  border: none !important;
+  width: 100% !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+}
+
+.profile-nav-link:hover {
+  background-color: #f9f5f7 !important;
+  color: #FB9EC6 !important;
+}
+
+.profile-nav-link.active {
+  background-color: #f9f5f7 !important;
+  color: #FB9EC6 !important;
+  font-weight: 500 !important;
+  border-left: 3px solid #FB9EC6 !important;
+}
+
+.profile-nav-icon {
+  margin-right: 10px !important;
+  width: 20px !important;
+  text-align: center !important;
+}
+
+/* Main content styles */
+.profile-content {
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  padding: 30px !important;
+}
+
+.profile-content-header {
+  margin-bottom: 25px !important;
+}
+
+.profile-content-title {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 10px !important;
+}
+
+.profile-content-subtitle {
+  color: #666 !important;
+  font-size: 16px !important;
+}
+
+/* Profile form styles */
+.profile-form .form-group {
+  margin-bottom: 20px !important;
+}
+
+.profile-form label {
+  display: block !important;
+  margin-bottom: 8px !important;
+  font-weight: 500 !important;
+  color: #444 !important;
+}
+
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+  width: 100% !important;
+  padding: 12px !important;
+  border: 1px solid #ddd !important;
+  border-radius: 6px !important;
+  font-size: 16px !important;
+  transition: border-color 0.3s !important;
+  background-color: #fff !important;
+}
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
+  outline: none !important;
+  border-color: #FB9EC6 !important;
+  box-shadow: 0 0 0 2px rgba(251, 158, 198, 0.2) !important;
+}
+
+.profile-form input:disabled {
+  background-color: #f8f8f8 !important;
+  cursor: not-allowed !important;
+}
+
+.profile-form .form-row {
+  display: flex !important;
+  gap: 20px !important;
+}
+
+.profile-form .form-row .form-group {
+  flex: 1 !important;
+}
+
+.profile-avatar-upload {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  margin-bottom: 30px !important;
+}
+
+.avatar-preview {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 2px solid #ddd !important;
+  background-color: #f0f0f0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.avatar-preview img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.avatar-upload-btn {
+  background-color: #f2f2f2 !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  padding: 8px 15px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: all 0.3s !important;
+  display: inline-block !important;
+}
+
+.avatar-upload-btn:hover {
+  background-color: #e8e8e8 !important;
+}
+
+.profile-form-buttons {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 15px !important;
+  margin-top: 30px !important;
+}
+
+.save-button {
+  padding: 12px 25px !important;
+  background-color: #FB9EC6 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s !important;
+}
+
+.save-button:hover {
+  background-color: #fa84b7 !important;
+}
+
+.save-button:disabled {
+  background-color: #ffc2dc !important;
+  cursor: not-allowed !important;
+}
+
+.cancel-button {
+  padding: 12px 25px !important;
+  background-color: #e0e0e0 !important;
+  color: #333 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s !important;
+}
+
+.cancel-button:hover {
+  background-color: #d0d0d0 !important;
+}
+
+.cancel-button:disabled {
+  background-color: #e8e8e8 !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+}
+
+.error-message {
+  background-color: #fde8e8 !important;
+  color: #e53e3e !important;
+  padding: 12px !important;
+  border-radius: 6px !important;
+  margin-bottom: 20px !important;
+  font-size: 14px !important;
+}
+
+.success-message {
+  background-color: #e6f7ea !important;
+  color: #276749 !important;
+  padding: 12px !important;
+  border-radius: 6px !important;
+  margin-bottom: 20px !important;
+  font-size: 14px !important;
+}
+
+/* Make sure forms and containers have proper width */
+.profile-form {
+  width: 100% !important;
+}
+
+/* Added styles for tab content that is currently not visible */
+.tab-content {
+  display: none !important;
+}
+
+.tab-content.active {
+  display: block !important;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .profile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-form .form-row {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  
+  .profile-avatar-upload {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  .profile-content {
+    padding: 20px !important;
+  }
+  
+  .profile-form-buttons {
+    flex-direction: column !important;
+  }
+  
+  .save-button,
+  .cancel-button {
+    width: 100% !important;
+  }
+}

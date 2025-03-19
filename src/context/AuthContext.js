@@ -33,6 +33,19 @@ export const AuthProvider = ({ children }) => {
       }
 
       const userData = await response.json();
+      
+      // Map role_id to user_type
+      if (userData.roles && userData.roles.length > 0) {
+        const primaryRole = userData.roles.find(role => role.is_primary) || userData.roles[0];
+        // Map role_id to user_type (adjust the mapping according to your role IDs)
+        const roleMap = {
+          1: 'admin',
+          2: 'owner',
+          3: 'renter'
+        };
+        userData.user_type = roleMap[primaryRole.role_id] || 'renter';
+      }
+      
       setUser(userData);
       setError(null);
     } catch (err) {

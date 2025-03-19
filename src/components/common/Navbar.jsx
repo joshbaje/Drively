@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const dropdownRef = useRef(null);
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src='/logo.svg' alt="Drively" className="navbar-logo-img" />
+          <img src={`${process.env.PUBLIC_URL}/logo.svg`}  alt="" className="navbar-logo-img" />
           <span className="navbar-logo-text">Drively</span>
         </Link>
         
@@ -40,11 +56,14 @@ const Navbar = () => {
                 <Link to="/bookings" className="navbar-link">My Bookings</Link>
               </li>
               
-              <li className="navbar-item dropdown">
-                <button className="navbar-link dropdown-toggle">
+              <li className="navbar-item dropdown" ref={dropdownRef}>
+                <button 
+                  className="navbar-link dropdown-toggle"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
                   My Account
                 </button>
-                <div className="dropdown-menu">
+                <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} onClick={(e) => e.stopPropagation()}>
                   <Link to="/profile" className="dropdown-item">Profile</Link>
                   {user?.user_type === 'owner' && (
                     <Link to="/owner-dashboard" className="dropdown-item">Owner Dashboard</Link>
@@ -53,12 +72,14 @@ const Navbar = () => {
                     <Link to="/renter-dashboard" className="dropdown-item">Renter Dashboard</Link>
                   )}
                   <Link to="/settings" className="dropdown-item">Settings</Link>
+                  <div className="dropdown-divider"></div>
                   <button 
                     onClick={(e) => {
                       e.preventDefault();
                       logout();
+                      setIsDropdownOpen(false);
                     }} 
-                    className="dropdown-item"
+                    className="dropdown-item logout-btn"
                   >
                     Logout
                   </button>

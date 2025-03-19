@@ -100,6 +100,41 @@ class ApiService {
     
     return this.handleResponse(response);
   }
+  
+  async createVehicle(vehicleData) {
+    const response = await fetch(`${this.baseUrl}/vehicles`, {
+      method: 'POST',
+      headers: this.getAuthHeaders(),
+      body: JSON.stringify(vehicleData)
+    });
+    
+    return this.handleResponse(response);
+  }
+  
+  async updateVehicle(id, vehicleData) {
+    const response = await fetch(`${this.baseUrl}/vehicles/${id}`, {
+      method: 'PUT',
+      headers: this.getAuthHeaders(),
+      body: JSON.stringify(vehicleData)
+    });
+    
+    return this.handleResponse(response);
+  }
+  
+  async uploadVehicleImage(vehicleId, imageFile) {
+    const formData = new FormData();
+    formData.append('image', imageFile);
+    
+    const response = await fetch(`${this.baseUrl}/vehicles/${vehicleId}/images`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+      },
+      body: formData
+    });
+    
+    return this.handleResponse(response);
+  }
 
   // Booking endpoints
   async createBooking(bookingData) {

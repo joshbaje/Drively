@@ -190,7 +190,7 @@ const HomePage = () => {
                 <li>Insurance coverage</li>
                 <li>24/7 customer support</li>
               </ul>
-              <Link to="/become-a-host" className="btn btn-primary">Start Hosting</Link>
+              <Link to="/list-your-car" className="btn btn-primary">Start Hosting</Link>
             </div>
             <div className="become-host-image">
               <img src="/images/car-owner.jpg" alt="Car owner with keys" />

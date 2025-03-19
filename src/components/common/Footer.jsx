@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-column">
             <div className="footer-logo">
-              <img src="/public/logo.svg" alt="Drively" className="footer-logo-img" />
+              <img src={`${process.env.PUBLIC_URL}/logo.svg`}  alt="Drively" className="footer-logo-img" />
               <span className="footer-logo-text">Drively</span>
             </div>
             <p className="footer-description">

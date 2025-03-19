@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './BookingForm.css';
 
-const BookingForm = ({ vehicle }) => {
+const BookingForm = ({ vehicleId, dailyRate, securityDeposit }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [specialRequests, setSpecialRequests] = useState('');
@@ -30,8 +30,8 @@ const BookingForm = ({ vehicle }) => {
 
   // Calculate total amount when relevant factors change
   useEffect(() => {
-    if (vehicle && totalDays > 0) {
-      const baseCost = vehicle.daily_rate * totalDays;
+    if (dailyRate && totalDays > 0) {
+      const baseCost = dailyRate * totalDays;
       const insuranceCost = insuranceOptions[selectedInsurance].rate * totalDays;
       const serviceFee = Math.round(baseCost * 0.10); // 10% service fee
       const tax = Math.round((baseCost + insuranceCost + serviceFee) * 0.12); // 12% tax
@@ -40,7 +40,7 @@ const BookingForm = ({ vehicle }) => {
     } else {
       setTotalAmount(0);
     }
-  }, [vehicle, totalDays, selectedInsurance]);
+  }, [dailyRate, totalDays, selectedInsurance]);
 
   const handleStartDateChange = (e) => {
     const newStartDate = e.target.value;
@@ -67,11 +67,11 @@ const BookingForm = ({ vehicle }) => {
     
     // Prepare booking data
     const bookingData = {
-      vehicleId: vehicle.vehicle_id,
+      vehicleId: vehicleId,
       startDate,
       endDate,
       totalDays,
-      dailyRate: vehicle.daily_rate,
+      dailyRate: dailyRate,
       insuranceType: selectedInsurance,
       insuranceRate: insuranceOptions[selectedInsurance].rate,
       totalAmount,
@@ -89,14 +89,14 @@ const BookingForm = ({ vehicle }) => {
   // Calculate min end date based on selected start date
   const minEndDate = startDate || today;
 
-  if (!vehicle) {
+  if (!vehicleId || !dailyRate) {
     return <div className="booking-form-container">Loading vehicle details...</div>;
   }
 
   return (
     <div className="booking-form-container">
       <div className="booking-price">
-        <span className="price">${vehicle.daily_rate}</span> / day
+        <span className="price">₱{dailyRate.toLocaleString()}</span> / day
       </div>
       
       <form className="booking-form" onSubmit={handleSubmit}>
@@ -160,28 +160,28 @@ const BookingForm = ({ vehicle }) => {
           <div className="booking-summary">
             <h3>Price Details</h3>
             <div className="summary-line">
-              <span>${vehicle.daily_rate} x {totalDays} days</span>
-              <span>${vehicle.daily_rate * totalDays}</span>
+              <span>₱{dailyRate.toLocaleString()} x {totalDays} days</span>
+              <span>₱{(dailyRate * totalDays).toLocaleString()}</span>
             </div>
             <div className="summary-line">
               <span>Insurance ({insuranceOptions[selectedInsurance].name})</span>
-              <span>${insuranceOptions[selectedInsurance].rate * totalDays}</span>
+              <span>₱{(insuranceOptions[selectedInsurance].rate * totalDays).toLocaleString()}</span>
             </div>
             <div className="summary-line">
               <span>Service Fee</span>
-              <span>${Math.round(vehicle.daily_rate * totalDays * 0.10)}</span>
+              <span>₱{Math.round(dailyRate * totalDays * 0.10).toLocaleString()}</span>
             </div>
             <div className="summary-line">
               <span>Tax</span>
-              <span>${Math.round(totalAmount - (totalAmount / 1.12))}</span>
+              <span>₱{Math.round(totalAmount - (totalAmount / 1.12)).toLocaleString()}</span>
             </div>
             <div className="summary-line total">
               <span>Total</span>
-              <span>${totalAmount}</span>
+              <span>₱{totalAmount.toLocaleString()}</span>
             </div>
             <div className="security-deposit-note">
               <i className="fas fa-info-circle"></i>
-              <span>Security deposit of ${vehicle.security_deposit} will be held and returned after successful drop-off.</span>
+              <span>Security deposit of ₱{securityDeposit.toLocaleString()} will be held and returned after successful drop-off.</span>
             </div>
           </div>
         )}
