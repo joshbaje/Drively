@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Drively/static/css/main.0feb1041.css",
-    "main.js": "/Drively/static/js/main.01de2f16.js",
+    "main.css": "/Drively/static/css/main.3806b1c1.css",
+    "main.js": "/Drively/static/js/main.603487d3.js",
     "static/media/fa-solid-900.ttf": "/Drively/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/fa-brands-400.ttf": "/Drively/static/media/fa-brands-400.1815e00441357e01619e.ttf",
     "static/media/fa-solid-900.woff2": "/Drively/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
@@ -11,11 +11,11 @@
     "static/media/fa-v4compatibility.ttf": "/Drively/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
     "static/media/fa-v4compatibility.woff2": "/Drively/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/Drively/index.html",
-    "main.0feb1041.css.map": "/Drively/static/css/main.0feb1041.css.map",
-    "main.01de2f16.js.map": "/Drively/static/js/main.01de2f16.js.map"
+    "main.3806b1c1.css.map": "/Drively/static/css/main.3806b1c1.css.map",
+    "main.603487d3.js.map": "/Drively/static/js/main.603487d3.js.map"
   },
   "entrypoints": [
-    "static/css/main.0feb1041.css",
-    "static/js/main.01de2f16.js"
+    "static/css/main.3806b1c1.css",
+    "static/js/main.603487d3.js"
   ]
 }
