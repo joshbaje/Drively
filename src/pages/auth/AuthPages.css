@@ -171,7 +171,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .auth-form .remember-me {
@@ -179,17 +179,50 @@
   align-items: center;
 }
 
-.auth-form .remember-me input {
-  margin-right: 8px;
+.auth-form .remember-me input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin-right: 10px;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.auth-form .remember-me input[type="checkbox"]:checked {
+  background-color: transparent;
+  border-color: #FBB4A5;
+}
+
+.auth-form .remember-me input[type="checkbox"]:checked::after {
+  content: "\2713";
+  position: absolute;
+  color: #FBB4A5;
+  font-size: 14px;
+  top: -2px;
+  left: 2px;
+}
+
+.auth-form .remember-me label {
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #555;
+  display: inline;
+  font-weight: normal;
 }
 
 .auth-form .forgot-password {
   color: #FB9EC6;
   text-decoration: none;
   font-size: 14px;
+  transition: all 0.2s ease;
 }
 
 .auth-form .forgot-password:hover {
+  color: #FBB4A5;
   text-decoration: underline;
 }
 

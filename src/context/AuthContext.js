@@ -92,12 +92,24 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       setLoading(true);
+      
+      // Transform userData to match the new API requirements
+      const apiData = {
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+        email: userData.email,
+        password: userData.password,
+        date_of_birth: userData.date_of_birth || null,
+        phone: userData.phone_number, // Map phone_number to phone
+        type: userData.user_type === 'owner' ? 'car_owner' : 'renter' // Transform user_type to type
+      };
+      
       const response = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(apiData)
       });
 
       if (!response.ok) {

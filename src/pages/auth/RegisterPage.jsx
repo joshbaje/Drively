@@ -13,7 +13,7 @@ const RegisterPage = () => {
     password: '',
     confirm_password: '',
     date_of_birth: '',
-    user_type: 'renter', // Default to renter
+    user_type: 'renter', // Default to renter (will be transformed to 'renter' for API)
     terms_accepted: false
   });
   

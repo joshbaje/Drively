@@ -9,13 +9,28 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   
+  // Check for message from the registration page
+  const registrationMessage = location.state?.message;
+  
   // Get the redirect path from location state, or default to homepage
   const from = location.state?.from?.pathname || '/';
+
+  // Show registration success message if present
+  React.useEffect(() => {
+    if (registrationMessage) {
+      setSuccess(registrationMessage);
+      // Clear the message after 5 seconds
+      const timer = setTimeout(() => setSuccess(''), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [registrationMessage]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,34 +62,50 @@ const LoginPage = () => {
       <div className="auth-container">
         <div className="auth-header">
           <h1>Welcome Back</h1>
-          <p>Sign in to continue to Drively</p>
+          <p>Sign in to continue to Drivelyph</p>
         </div>
         
         {error && <div className="auth-error">{error}</div>}
+        {success && <div className="auth-success">{success}</div>}
         
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
+            <label htmlFor="email">Email <span className="required">*</span></label>
+            <div className="input-with-icon">
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
+              <i className="fas fa-envelope input-icon"></i>
+            </div>
           </div>
           
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
+            <label htmlFor="password">Password <span className="required">*</span></label>
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+              <i className="fas fa-lock input-icon"></i>
+              <button 
+                type="button" 
+                className="password-toggle" 
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                tabIndex="-1"
+              >
+                <i className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+              </button>
+            </div>
           </div>
           
           <div className="form-options">
@@ -94,25 +125,24 @@ const LoginPage = () => {
           
           <button 
             type="submit" 
-            className="auth-button"
+            className="create-account-button"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Signing In...' : 'Sign In'}
+            {isSubmitting ? 'SIGNING IN...' : 'SIGN IN'}
           </button>
         </form>
         
-        <div className="social-login">
-          <p>Or sign in with</p>
-          <div className="social-buttons">
-            <button className="social-button facebook">
-              <i className="fab fa-facebook-f"></i>
-              Facebook
-            </button>
-            <button className="social-button google">
-              <i className="fab fa-google"></i>
-              Google
-            </button>
-          </div>
+        <div className="divider">Or sign in with</div>
+        
+        <div className="social-buttons">
+          <button className="social-button">
+            <i className="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+          </button>
+          <button className="social-button">
+            <i className="fab fa-google"></i>
+            <span>Google</span>
+          </button>
         </div>
         
         <div className="auth-footer">
