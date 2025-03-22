@@ -10,6 +10,7 @@ const VehicleCalendarPage = () => {
   // Function to open the new booking modal with this vehicle
   const openNewBookingWithVehicle = () => {
     // We'll dispatch a custom event that the parent component can listen for
+    console.log('Opening new booking with vehicle:', vehicleId);
     const event = new CustomEvent('openNewBookingWithVehicle', { detail: { vehicleId } });
     window.dispatchEvent(event);
   };

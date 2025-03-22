@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import NewBooking from '../../pages/agent/NewBooking';
 import './AgentComponents.css';
 
 const NewBookingModal = ({ isOpen, onClose, selectedVehicleId }) => {
+  useEffect(() => {
+    // Log when component mounts or vehicleId changes
+    if (selectedVehicleId) {
+      console.log('NewBookingModal received selectedVehicleId:', selectedVehicleId);
+    }
+  }, [selectedVehicleId]);
+  
   if (!isOpen) return null;
 
   return (

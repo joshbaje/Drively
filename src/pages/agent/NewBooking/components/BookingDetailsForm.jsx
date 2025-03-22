@@ -188,7 +188,14 @@ const BookingDetailsForm = ({ isModal, onClose }) => {
             <button 
               type="button" 
               className="back-btn"
-              onClick={() => isModal ? (onClose ? onClose() : setCurrentStep(1)) : setCurrentStep(1)}
+              onClick={() => {
+                if (isModal && onClose) {
+                  onClose();
+                } else {
+                  // Always return to step 1 when back button is clicked
+                  setCurrentStep(1);
+                }
+              }}
             >
               {isModal ? 'Cancel' : 'Back'}
             </button>

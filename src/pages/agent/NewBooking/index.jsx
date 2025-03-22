@@ -25,10 +25,11 @@ const NewBookingContent = ({ isModal = false, onClose, preSelectedVehicleId }) =
     fetchVehicleById
   } = useBooking();
 
-  // Check for customer ID in URL or location state
+  // Check for vehicle ID, customer ID in URL or location state
   useEffect(() => {
     // If a vehicle ID was passed, fetch and select that vehicle
     if (preSelectedVehicleId) {
+      console.log('NewBooking: preSelectedVehicleId detected:', preSelectedVehicleId);
       fetchVehicleById(preSelectedVehicleId);
     }
     
@@ -41,7 +42,7 @@ const NewBookingContent = ({ isModal = false, onClose, preSelectedVehicleId }) =
         fetchCustomerById(customerId);
       }
     }
-  }, [location, fetchCustomerById]);
+  }, [preSelectedVehicleId, location, fetchCustomerById, fetchVehicleById]);
 
   return (
     <div className={`new-booking-container ${isModal ? 'modal-container' : ''}`}>

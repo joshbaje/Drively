@@ -71,6 +71,7 @@ const AgentPortal = () => {
     // Event listener for opening new booking modal with a specific vehicle
     const handleOpenNewBookingWithVehicle = (event) => {
       const { vehicleId } = event.detail;
+      console.log('Event received in AgentPortal, opening modal with vehicle ID:', vehicleId);
       openBookingModal(vehicleId);
     };
     

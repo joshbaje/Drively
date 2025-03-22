@@ -14,6 +14,7 @@ The application includes both a customer-facing website and an admin/agent porta
 - **Enhanced Data Passing**: Improved how booking details are passed between components
 - **Vehicle Details Integration**: Better integration of vehicle information in the booking process
 - **Seamless Navigation**: Created smooth transition between booking form and payment page
+- **Agent Booking Modal**: Fixed issue with creating bookings from the Vehicle Calendar page
 
 The booking process now follows a proper flow:
 1. User selects dates and insurance on the vehicle details page
@@ -21,7 +22,7 @@ The booking process now follows a proper flow:
 3. User is automatically redirected to the payment page with all booking details
 4. After payment, user receives a booking confirmation
 
-See [Booking-Process-README.md](./Booking-Process-README.md) for detailed documentation on the booking system.
+See [Booking-Process-README.md](./Booking-Process-README.md) for detailed documentation on the booking system and [Vehicle-Calendar-NewBooking-Fix.md](./Vehicle-Calendar-NewBooking-Fix.md) for information about the agent booking modal fix.
 
 
 

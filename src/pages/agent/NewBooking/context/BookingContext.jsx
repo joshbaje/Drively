@@ -85,22 +85,33 @@ export const BookingProvider = ({ children }) => {
 
   // Fetch a specific vehicle by ID
   const fetchVehicleById = (vehicleId) => {
+    if (!vehicleId) return;
+    
     setIsLoading(true);
+    // Convert vehicleId to string for consistent comparison
+    const vehicleIdStr = String(vehicleId);
+    console.log('Fetching vehicle by ID:', vehicleIdStr);
+    
     // Simulating API call with setTimeout
     setTimeout(() => {
-      const foundVehicle = vehicles.find(v => v.id === vehicleId);
+      const foundVehicle = vehicles.find(v => String(v.id) === vehicleIdStr);
       
       if (foundVehicle) {
+        console.log('Found vehicle in loaded vehicles:', foundVehicle);
         setSelectedVehicle(foundVehicle);
+        // Also update the current step to 2 (booking details) if a vehicle is pre-selected
+        setCurrentStep(2);
       } else {
         // If not found in loaded vehicles, create a mock one (simulating API fetch)
+        console.log('Vehicle not found in loaded vehicles, creating mock vehicle');
         const mockVehicle = {
-          id: vehicleId,
+          id: vehicleIdStr,
           make: 'Toyota',
           model: 'Camry',
           year: 2022,
           vehicle_type: 'sedan',
           transmission: 'automatic',
+          fuel_type: 'gasoline',
           daily_rate: 75,
           security_deposit: 1000,
           location: 'New York',
@@ -110,6 +121,8 @@ export const BookingProvider = ({ children }) => {
           availability_status: 'available'
         };
         setSelectedVehicle(mockVehicle);
+        // Also update the current step to 2 (booking details) if a vehicle is pre-selected
+        setCurrentStep(2);
       }
       
       setIsLoading(false);
