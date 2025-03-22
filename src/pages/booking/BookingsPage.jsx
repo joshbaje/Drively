@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import apiService from '../../services/apiService';
+import ReviewModal from '../../components/rating/ReviewModal';
 import './BookingsPage.css';
 
 const BookingsPage = () => {
@@ -9,6 +10,8 @@ const BookingsPage = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   
   useEffect(() => {
     // Fetch bookings when component mounts
@@ -98,7 +101,8 @@ const BookingsPage = () => {
             service_fee: 560,
             tax: 806,
             total_amount: 7566,
-            created_at: '2025-01-25'
+            created_at: '2025-01-25',
+            reviewed: false
           },
           {
             id: 'BK-2025-004',
@@ -124,6 +128,32 @@ const BookingsPage = () => {
             tax: 1006,
             total_amount: 9426,
             created_at: '2025-02-15'
+          },
+          {
+            id: 'BK-2025-005',
+            status: 'completed',
+            vehicle: {
+              id: 5,
+              make: 'Ford',
+              model: 'Everest',
+              year: 2023,
+              image: '/images/cars/ford-everest.jpg',
+              location: 'Quezon City'
+            },
+            owner: {
+              id: 105,
+              name: 'Michael Santos'
+            },
+            start_date: '2025-01-15',
+            end_date: '2025-01-18',
+            total_days: 3,
+            daily_rate: 4500,
+            insurance_rate: 35,
+            service_fee: 1350,
+            tax: 1764,
+            total_amount: 16764,
+            created_at: '2025-01-05',
+            reviewed: true
           }
         ];
         
@@ -158,6 +188,27 @@ const BookingsPage = () => {
       default:
         return bookings;
     }
+  };
+  
+  // Handle review submission
+  const handleReviewSubmit = (reviewData) => {
+    console.log('Review submitted:', reviewData);
+    
+    // In a real app, submit to API and update booking status
+    // For now, just update the local state to mark this booking as reviewed
+    setBookings(prevBookings => 
+      prevBookings.map(booking => 
+        booking.id === reviewData.bookingId 
+          ? { ...booking, reviewed: true }
+          : booking
+      )
+    );
+  };
+  
+  // Open review modal for a booking
+  const openReviewModal = (booking) => {
+    setSelectedBooking(booking);
+    setShowReviewModal(true);
   };
   
   const filteredBookings = getFilteredBookings();
@@ -335,10 +386,18 @@ const BookingsPage = () => {
                           Cancel Booking
                         </button>
                       )}
-                      {booking.status === 'completed' && (
-                        <button className="booking-button btn-primary">
+                      {booking.status === 'completed' && !booking.reviewed && (
+                        <button 
+                          className="booking-button btn-primary"
+                          onClick={() => openReviewModal(booking)}
+                        >
                           Write a Review
                         </button>
+                      )}
+                      {booking.status === 'completed' && booking.reviewed && (
+                        <span className="review-complete-badge">
+                          <i className="fas fa-check-circle"></i> Reviewed
+                        </span>
                       )}
                       <button className="booking-button btn-secondary">
                         Contact Support
@@ -351,6 +410,16 @@ const BookingsPage = () => {
           )}
         </div>
       </div>
+      
+      {/* Review Modal */}
+      {selectedBooking && (
+        <ReviewModal
+          isOpen={showReviewModal}
+          onClose={() => setShowReviewModal(false)}
+          booking={selectedBooking}
+          onSubmitReview={handleReviewSubmit}
+        />
+      )}
     </div>
   );
 };

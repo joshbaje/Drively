@@ -1,0 +1,437 @@
+/* Rating Form Styles */
+.rating-form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.rating-form-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.rating-tabs {
+  display: flex;
+  gap: 20px;
+}
+
+.rating-tab {
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+}
+
+.rating-tab.active {
+  color: #2a2a2a;
+  font-weight: 600;
+}
+
+.rating-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #FB9EC6;
+  border-radius: 3px 3px 0 0;
+}
+
+.rating-tab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rating-form {
+  padding: 20px;
+}
+
+.rating-tab-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.rating-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.rating-stars-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 10px;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 8px;
+}
+
+.star {
+  font-size: 28px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star:hover, .star.selected {
+  color: #FFE893;
+}
+
+.rating-value {
+  font-size: 18px;
+  font-weight: 600;
+  width: 24px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #FB9EC6;
+  box-shadow: 0 0 0 2px rgba(251, 158, 198, 0.2);
+}
+
+.rating-error {
+  color: #e53935;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.rating-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rating-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.cancel-btn, .back-btn {
+  background-color: #f5f5f5;
+  color: #555;
+}
+
+.cancel-btn:hover, .back-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.continue-btn, .submit-btn {
+  background-color: #FB9EC6;
+  color: #fff;
+}
+
+.continue-btn:hover, .submit-btn:hover {
+  background-color: #fa8ab8;
+}
+
+.rating-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Review Modal Styles */
+.review-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.review-modal {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalFadeIn 0.3s;
+}
+
+.review-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.review-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.review-modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.review-modal-close:hover {
+  background-color: #f5f5f5;
+}
+
+.review-modal-content {
+  padding: 20px;
+}
+
+.booking-summary {
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 16px;
+}
+
+.booking-image {
+  width: 80px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.booking-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-details {
+  flex: 1;
+}
+
+.booking-vehicle-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.booking-date {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.booking-owner {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Success Message Styles */
+.review-success {
+  text-align: center;
+  padding: 40px 20px;
+  animation: fadeIn 0.5s;
+}
+
+.success-icon {
+  font-size: 60px;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+.success-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.success-message {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.done-btn {
+  background-color: #FB9EC6;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.done-btn:hover {
+  background-color: #fa8ab8;
+}
+
+/* Reviews Display Styles */
+.reviews-container {
+  margin-top: 20px;
+}
+
+.review-item {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewer-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.reviewer-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.review-date {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  color: #FFE893;
+}
+
+.review-comment {
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ratings-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.rating-category {
+  text-align: center;
+}
+
+.rating-number {
+  font-size: 36px;
+  font-weight: 600;
+  color: #2a2a2a;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.rating-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.reviews-list-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.no-reviews {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}

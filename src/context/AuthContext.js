@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-
-const API_BASE_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:scA8Isc8';
+import ApiService from '../services/api';
 
 export const AuthContext = createContext();
 
@@ -22,37 +21,7 @@ export const AuthProvider = ({ children }) => {
   const fetchCurrentUser = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/auth/me`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error('Session expired or invalid');
-      }
-
-      const userData = await response.json();
-      
-      // Map role_id to user_type
-      if (userData.roles && userData.roles.length > 0) {
-        const primaryRole = userData.roles.find(role => role.is_primary) || userData.roles[0];
-        // Map role_id to user_type based on the current role structure
-        const roleMap = {
-          3: 'admin',
-          4: 'support',
-          5: 'guest',
-          6: 'verified_renter',
-          7: 'verified_owner',
-          8: 'fleet_manager',
-          9: 'finance_admin',
-          10: 'content_moderator',
-          11: 'system_admin',
-          12: 'super_admin'
-        };
-        userData.user_type = roleMap[primaryRole.role_id] || 'guest';
-      }
-      
+      const userData = await ApiService.auth.getCurrentUser();
       setUser(userData);
       setError(null);
     } catch (err) {
@@ -67,24 +36,13 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed');
-      }
-
-      const data = await response.json();
+      const data = await ApiService.auth.login(email, password);
       
-      // Save the token to local storage
-      localStorage.setItem('auth_token', data.authToken);
-      setToken(data.authToken);
+      if (data.authToken) {
+        localStorage.setItem('auth_token', data.authToken);
+        setToken(data.authToken);
+      }
+      
       setUser(data.user);
       setError(null);
       return data;
@@ -99,40 +57,14 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       setLoading(true);
+      const data = await ApiService.auth.register(userData);
       
-      // Transform userData to match the new API requirements
-      const apiData = {
-        first_name: userData.first_name,
-        last_name: userData.last_name,
-        email: userData.email,
-        password: userData.password,
-        date_of_birth: userData.date_of_birth || null,
-        phone: userData.phone_number, // Map phone_number to phone
-        type: userData.user_type === 'owner' ? 'car_owner' : 'renter' // Transform user_type to type
-      };
-      
-      const response = await fetch(`${API_BASE_URL}/auth/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(apiData)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Registration failed');
-      }
-
-      const data = await response.json();
-      
-      // Auto-login after registration if API returns a token
       if (data.authToken) {
         localStorage.setItem('auth_token', data.authToken);
         setToken(data.authToken);
-        setUser(data.user);
       }
       
+      setUser(data.user);
       setError(null);
       return data;
     } catch (err) {
@@ -144,6 +76,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    ApiService.auth.logout();
     localStorage.removeItem('auth_token');
     setToken(null);
     setUser(null);
@@ -152,21 +85,7 @@ export const AuthProvider = ({ children }) => {
   const updateUserProfile = async (profileData) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/auth/update-profile`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(profileData)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Profile update failed');
-      }
-
-      const data = await response.json();
+      const data = await ApiService.auth.updateProfile(profileData);
       setUser(prevUser => ({ ...prevUser, ...data }));
       setError(null);
       return data;
@@ -181,21 +100,9 @@ export const AuthProvider = ({ children }) => {
   const resetPassword = async (email) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/auth/reset-password`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Password reset request failed');
-      }
-
+      const response = await ApiService.auth.resetPasswordRequest(email);
       setError(null);
-      return await response.json();
+      return response;
     } catch (err) {
       setError(err.message);
       throw err;

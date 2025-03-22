@@ -214,10 +214,11 @@ src/
 
 ### Planned Features
 
-1. **Backend API Integration**
-   - Connect all forms to the backend API
-   - Implement proper authentication and authorization
-   - Enable real data persistence
+1. **Backend API Integration** ✅
+   - Connect all forms to the backend API through a flexible API service architecture
+   - Implement proper authentication and authorization with JWT
+   - Support both Xano (current) and Supabase (future) backends
+   - See [API Integration Guide](./README-API-Integration.md) for details
 
 2. **Enhanced Vehicle Management**
    - Add vehicle availability calendar
