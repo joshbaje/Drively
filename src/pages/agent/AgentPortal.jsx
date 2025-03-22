@@ -8,6 +8,7 @@ import AgentDashboard from './AgentDashboard';
 import CustomerManagement from './CustomerManagement';
 import BookingManagement from './BookingManagement';
 import NewBooking from './NewBooking';
+import CarManagement from './CarManagement';
 import CallLogs from './CallLogs';
 import AgentSettings from './AgentSettings';
 
@@ -36,30 +37,37 @@ const AgentPortal = () => {
     return location.pathname === `/agent${path}`;
   };
 
-  // Get current page title based on route
+  // Get current page title based on route with role prefix
   const getPageTitle = () => {
+    const rolePrefix = user?.user_type === 'content_moderator' ? 'Content Moderator | ' : 'Support Agent | ';
     const path = location.pathname;
-    if (path === '/agent' || path === '/agent/dashboard') return 'Dashboard';
-    if (path.includes('/customers')) return 'Customer Management';
-    if (path.includes('/bookings') && !path.includes('/new')) return 'Booking Management';
-    if (path.includes('/bookings/new')) return 'New Booking';
-    if (path.includes('/calls')) return 'Call Logs';
-    if (path.includes('/settings')) return 'Agent Settings';
-    return 'Agent Portal';
+    
+    if (path === '/agent' || path === '/agent/dashboard') return `${rolePrefix}Dashboard`;
+    if (path.includes('/customers')) return `${rolePrefix}Customer Management`;
+    if (path.includes('/bookings') && !path.includes('/new')) return `${rolePrefix}Booking Management`;
+    if (path.includes('/bookings/new')) return `${rolePrefix}New Booking`;
+    if (path.includes('/calls')) return `${rolePrefix}Call Logs`;
+    if (path.includes('/settings')) return `${rolePrefix}Settings`;
+    
+    return user?.user_type === 'content_moderator' ? 'Content Moderator Portal' : 'Support Agent Portal';
   };
 
   return (
     <div className="agent-portal">
+      {/* Mobile menu button */}
+      <button className="mobile-menu-btn" onClick={toggleSidebar}>
+        <i className={`fas fa-${sidebarCollapsed ? 'bars' : 'times'}`}></i>
+      </button>
       <aside className={`agent-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-header">
-          <h3>Agent Portal</h3>
+          <h3>{user?.user_type === 'content_moderator' ? 'Content Portal' : 'Agent Portal'}</h3>
           <button className="sidebar-toggle" onClick={toggleSidebar}>
             <i className={`fas fa-${sidebarCollapsed ? 'chevron-right' : 'chevron-left'}`}></i>
           </button>
         </div>
         
         <div className="agent-logo">
-          {!sidebarCollapsed && <img src="/assets/images/logo.png" alt="Drivelyph Logo" />}
+          {!sidebarCollapsed && <img src={`${process.env.PUBLIC_URL}/logo.svg`} alt="Drivelyph Logo" />}
         </div>
         
         <ul className="sidebar-menu">
@@ -85,6 +93,12 @@ const AgentPortal = () => {
             <NavLink to="/agent/bookings/new" className={isActive('/bookings/new') ? 'active' : ''}>
               <span className="menu-icon"><i className="fas fa-plus-circle"></i></span>
               <span className="menu-text">New Booking</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/agent/cars" className={isActive('/cars') ? 'active' : ''}>
+              <span className="menu-icon"><i className="fas fa-car"></i></span>
+              <span className="menu-text">Car Management</span>
             </NavLink>
           </li>
           <li>
@@ -119,7 +133,7 @@ const AgentPortal = () => {
               <select 
                 value={agentStatus} 
                 onChange={(e) => changeAgentStatus(e.target.value)}
-                style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
+                className="agent-status-select"
               >
                 <option value="online">Online</option>
                 <option value="busy">Busy</option>
@@ -128,13 +142,13 @@ const AgentPortal = () => {
             </div>
             <div className="agent-user">
               <img 
-                src={user?.profile_image_url || "/assets/images/default-avatar.png"} 
+                src={user?.profile_image_url || "https://ui-avatars.com/api/?name=Agent&background=FB9EC6&color=fff"} 
                 alt="Agent" 
                 className="agent-avatar" 
               />
               <div className="agent-info">
                 <div className="agent-name">{user?.first_name} {user?.last_name}</div>
-                <div className="agent-role">Agent</div>
+                <div className="agent-role">{user?.user_type === 'content_moderator' ? 'Content Moderator' : 'Support Agent'}</div>
               </div>
             </div>
           </div>
@@ -148,6 +162,9 @@ const AgentPortal = () => {
           <Route path="/bookings" element={<BookingManagement />} />
           <Route path="/bookings/:id" element={<BookingManagement showDetails={true} />} />
           <Route path="/bookings/new" element={<NewBooking />} />
+          <Route path="/bookings/new/*" element={<NewBooking />} />
+          <Route path="/cars" element={<CarManagement />} />
+          <Route path="/cars/:id" element={<CarManagement showDetails={true} />} />
           <Route path="/calls" element={<CallLogs />} />
           <Route path="/settings" element={<AgentSettings />} />
         </Routes>

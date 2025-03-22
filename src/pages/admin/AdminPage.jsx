@@ -3,11 +3,8 @@ import { Link, useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './AdminPage.css';
 
-// Admin components
-import AdminDashboard from '../../components/admin/AdminDashboard';
-import UserManagement from '../../components/admin/UserManagement';
-import VehicleManagement from '../../components/admin/VehicleManagement';
-import BookingManagement from '../../components/admin/BookingManagement';
+// Admin Routes
+import AdminRoutes from '../../components/admin/AdminRoutes';
 
 const AdminPage = () => {
   const { user, isAuthenticated, isAdmin } = useAuth();
@@ -38,19 +35,7 @@ const AdminPage = () => {
     return <Navigate to="/" replace />;
   }
   
-  // Render the appropriate component based on the active tab
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'users':
-        return <UserManagement />;
-      case 'vehicles':
-        return <VehicleManagement />;
-      case 'bookings':
-        return <BookingManagement />;
-      default:
-        return <AdminDashboard />;
-    }
-  };
+  // We no longer need the renderContent function since we're using AdminRoutes
   
   return (
     <div className="admin-page">
@@ -165,7 +150,7 @@ const AdminPage = () => {
         </div>
         
         <div className="content-body">
-          {renderContent()}
+          <AdminRoutes />
         </div>
       </div>
     </div>

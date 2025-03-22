@@ -46,10 +46,28 @@ const LoginPage = () => {
       setError('');
       
       // Call login from AuthContext
-      await login(email, password);
+      const loginData = await login(email, password);
+      
+      // Determine redirect based on user role
+      let redirectPath = from;
+      
+      // If the user has a specific role, redirect to their dashboard
+      const userType = loginData?.user?.user_type;
+      
+      if (userType) {
+        if (userType === 'admin' || userType === 'super_admin' || userType === 'system_admin') {
+          redirectPath = '/admin';
+        } else if (userType === 'support' || userType === 'content_moderator') {
+          redirectPath = '/agent/dashboard';
+        } else if (userType === 'verified_owner' || userType === 'fleet_manager') {
+          redirectPath = '/owner/dashboard';
+        } else if (userType === 'verified_renter') {
+          redirectPath = '/renter-dashboard';
+        }
+      }
       
       // Login successful, redirect
-      navigate(from, { replace: true });
+      navigate(redirectPath, { replace: true });
     } catch (err) {
       setError(err.message || 'Login failed. Please check your credentials.');
     } finally {

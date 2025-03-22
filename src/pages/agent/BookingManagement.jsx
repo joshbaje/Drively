@@ -291,18 +291,20 @@ const BookingManagement = ({ showDetails = false }) => {
   };
 
   const renderBookingStatusBadge = (status) => {
-    const statusClasses = {
-      pending: 'status-pending',
-      confirmed: 'status-confirmed',
-      in_progress: 'status-in-progress',
-      completed: 'status-completed',
-      cancelled: 'status-cancelled',
-      declined: 'status-declined'
+    const statusLabels = {
+      pending: 'Pending',
+      confirmed: 'Confirmed',
+      in_progress: 'In Progress',
+      completed: 'Completed',
+      cancelled: 'Cancelled',
+      declined: 'Declined'
     };
     
+    const statusClass = status.replace('_', '-');
+    
     return (
-      <span className={`status-badge ${statusClasses[status] || ''}`}>
-        {status.replace('_', ' ')}
+      <span className={`status-badge status-${statusClass}`}>
+        {statusLabels[status] || status.replace('_', ' ')}
       </span>
     );
   };
@@ -376,8 +378,8 @@ const BookingManagement = ({ showDetails = false }) => {
         ) : (
           <>
             {filteredBookings.length > 0 ? (
-              <div className="bookings-table">
-                <table>
+              <div className="table-responsive">
+                <table className="bookings-table-inner">
                   <thead>
                     <tr>
                       <th>Booking ID</th>
@@ -402,20 +404,23 @@ const BookingManagement = ({ showDetails = false }) => {
                             <img src={booking.vehicle.image_url} alt={`${booking.vehicle.make} ${booking.vehicle.model}`} />
                           </div>
                           <div className="vehicle-details">
-                            {booking.vehicle.year} {booking.vehicle.make} {booking.vehicle.model}
+                            <div className="vehicle-name">{booking.vehicle.year} {booking.vehicle.make}</div>
+                            <div className="vehicle-model">{booking.vehicle.model}</div>
                           </div>
                         </td>
                         <td className="booking-status">
                           {renderBookingStatusBadge(booking.booking_status)}
                           <div className="payment-status">
-                            Payment: <span className={`payment-${booking.payment_status}`}>{booking.payment_status}</span>
+                            Payment: <span className={`payment-status-badge payment-${booking.payment_status}`}>{booking.payment_status}</span>
                           </div>
                         </td>
                         <td className="booking-dates">
                           <div>Start: {formatDate(booking.start_date)}</div>
                           <div>End: {formatDate(booking.end_date)}</div>
                         </td>
-                        <td className="booking-amount">${booking.total_amount.toFixed(2)}</td>
+                        <td className="booking-amount">
+                          <div className="amount-value">${booking.total_amount.toFixed(2)}</div>
+                        </td>
                         <td className="booking-actions">
                           <button 
                             className="btn-view"

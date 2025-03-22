@@ -1,8 +1,46 @@
-# Getting Started with Create React App
+# Drively Car Rental Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Drively is a peer-to-peer car rental platform similar to Airbnb but for vehicles. The platform enables car owners to list their vehicles for rent, and renters to find and book vehicles that suit their needs.
 
-## Available Scripts
+## Project Overview
+
+The application includes both a customer-facing website and an admin/agent portal for managing the platform. This repository contains the frontend implementation built with React.
+
+## Recent Updates
+
+### Add New Car Modal in Agent Portal
+
+The Add New Car modal in the Agent Portal's Car Management page has been significantly enhanced with the following features:
+
+- **Comprehensive Form Fields**:
+  - Basic vehicle information (make, model, year, trim)
+  - Registration information with VIN validation
+  - Vehicle specifications (transmission, fuel type)
+  - Pricing and status management
+  - Vehicle description field
+  - Dynamic feature management
+
+- **Image Upload Functionality**:
+  - Support for up to 5 vehicle images
+  - Image preview with delete capability
+  - First image automatically set as primary display image
+
+- **Form Validation**:
+  - Required field validation
+  - VIN format validation (ensuring 17-character format without I, O, Q)
+  - Informative error messages
+
+- **Status Management**:
+  - Multiple status options (Available, Rented, Maintenance, Unlisted, Pending Approval)
+  - Helpful tooltips explaining status implications
+
+- **Enhanced User Experience**:
+  - Success notifications after form submission
+  - Loading state indicators during submission
+  - Section organization for better form navigation
+  - Contextual help hints for complex fields
+
+## Getting Started
 
 In the project directory, you can run:
 
@@ -68,3 +106,75 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Project Structure
+
+```
+src/
+  ├── components/
+  │   ├── admin/      # Admin portal components
+  │   ├── agent/      # Agent portal components
+  │   ├── common/     # Shared UI components
+  │   ├── booking/    # Booking-related components
+  │   └── vehicle/    # Vehicle-related components
+  ├── pages/
+  │   ├── admin/      # Admin portal pages
+  │   ├── agent/      # Agent portal pages
+  │   └── ...         # Other pages
+  ├── context/        # React context providers
+  ├── hooks/          # Custom React hooks
+  ├── services/       # API services (currently mocked)
+  ├── utils/          # Utility functions
+  └── assets/         # Static assets
+```
+
+## Future Development
+
+### Planned Features
+
+1. **Backend API Integration**
+   - Connect all forms to the backend API
+   - Implement proper authentication and authorization
+   - Enable real data persistence
+
+2. **Enhanced Vehicle Management**
+   - Add vehicle availability calendar
+   - Implement search and filtering enhancements
+   - Support bulk operations for fleet management
+
+3. **Booking Improvements**
+   - Multi-step booking process
+   - Integration with payment gateways
+   - Support for recurring bookings
+
+4. **User Management**
+   - Enhanced customer profiles
+   - Document verification workflows
+   - Rating and review system
+
+5. **Reporting & Analytics**
+   - Financial reporting dashboard
+   - Vehicle performance metrics
+   - Occupancy and utilization reporting
+
+## Color Palette
+
+- Light Yellow: `#FCFFC1` (rgb(252, 255, 193))
+- Yellow: `#FFE893` (rgb(255, 232, 147))
+- Coral: `#FBB4A5` (rgb(251, 180, 165))
+- Pink: `#FB9EC6` (rgb(251, 158, 198))
+
+## Login Details
+
+To test the application, use the following credentials:
+
+- **Email**: bajejosh@gmail.com
+- **Password**: 1 
+
+## Contributors
+
+- Josh Baje - Lead Developer
+
+## License
+
+This project is proprietary and confidential.

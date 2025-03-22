@@ -30,24 +30,25 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   
   // Map of role IDs to role names
   const roleMap = {
-    1: 'admin',
-    2: 'super_admin',
-    3: 'owner',
-    4: 'verified_owner',
-    5: 'premium_owner',
-    6: 'business_owner',
-    7: 'renter',
-    8: 'verified_renter',
-    9: 'premium_renter',
-    10: 'support_agent',
-    11: 'finance_admin',
-    12: 'content_manager'
+    3: 'admin',
+    4: 'support',
+    5: 'guest',
+    6: 'verified_renter',
+    7: 'verified_owner',
+    8: 'fleet_manager',
+    9: 'finance_admin',
+    10: 'content_moderator',
+    11: 'system_admin',
+    12: 'super_admin'
   };
   
   // If role is required but user doesn't have it, redirect to appropriate page
   if (requiredRole) {
-    // Check if user has the required role directly
-    if (user.user_type === requiredRole) {
+    // Check if requiredRole is an array
+    const requiredRoles = Array.isArray(requiredRole) ? requiredRole : [requiredRole];
+    
+    // Check if user has any of the required roles directly
+    if (requiredRoles.includes(user.user_type)) {
       return children;
     }
     
@@ -55,7 +56,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     if (user.roles && user.roles.length > 0) {
       const hasRequiredRole = user.roles.some(role => {
         const roleName = roleMap[role.role_id];
-        return roleName === requiredRole;
+        return requiredRoles.includes(roleName);
       });
       
       if (hasRequiredRole) {
@@ -64,10 +65,12 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     }
     
     // Handle redirects based on user type
-    if (user.user_type === 'admin' || user.user_type === 'super_admin') {
+    if (user.user_type === 'admin' || user.user_type === 'super_admin' || user.user_type === 'system_admin') {
       return <Navigate to="/admin" replace />;
-    } else if (user.user_type === 'owner' || user.user_type.includes('owner')) {
-      return <Navigate to="/owner-dashboard" replace />;
+    } else if (user.user_type === 'verified_owner' || user.user_type === 'fleet_manager' || user.user_type.includes('owner')) {
+      return <Navigate to="/owner/dashboard" replace />;
+    } else if (user.user_type === 'support' || user.user_type === 'content_moderator') {
+      return <Navigate to="/agent/dashboard" replace />;
     } else {
       return <Navigate to="/" replace />;
     }

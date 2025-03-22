@@ -37,13 +37,20 @@ export const AuthProvider = ({ children }) => {
       // Map role_id to user_type
       if (userData.roles && userData.roles.length > 0) {
         const primaryRole = userData.roles.find(role => role.is_primary) || userData.roles[0];
-        // Map role_id to user_type (adjust the mapping according to your role IDs)
+        // Map role_id to user_type based on the current role structure
         const roleMap = {
-          1: 'admin',
-          2: 'owner',
-          3: 'renter'
+          3: 'admin',
+          4: 'support',
+          5: 'guest',
+          6: 'verified_renter',
+          7: 'verified_owner',
+          8: 'fleet_manager',
+          9: 'finance_admin',
+          10: 'content_moderator',
+          11: 'system_admin',
+          12: 'super_admin'
         };
-        userData.user_type = roleMap[primaryRole.role_id] || 'renter';
+        userData.user_type = roleMap[primaryRole.role_id] || 'guest';
       }
       
       setUser(userData);
@@ -210,9 +217,10 @@ export const AuthProvider = ({ children }) => {
         updateUserProfile,
         resetPassword,
         isAuthenticated: !!user,
-        isOwner: user?.user_type === 'owner',
-        isRenter: user?.user_type === 'renter',
-        isAdmin: user?.user_type === 'admin'
+        isOwner: user?.user_type === 'verified_owner' || user?.user_type === 'fleet_manager',
+        isRenter: user?.user_type === 'verified_renter',
+        isAdmin: user?.user_type === 'admin' || user?.user_type === 'super_admin' || user?.user_type === 'system_admin',
+        isAgent: user?.user_type === 'support' || user?.user_type === 'content_moderator'
       }}
     >
       {children}

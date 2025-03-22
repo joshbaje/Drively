@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import './AgentPortal.css';
+import AddCustomerModal from '../../components/agent/AddCustomerModal';
 
 const CustomerManagement = ({ showDetails = false }) => {
   const { id } = useParams();
@@ -10,16 +11,6 @@ const CustomerManagement = ({ showDetails = false }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [filterText, setFilterText] = useState('');
   const [showAddCustomerModal, setShowAddCustomerModal] = useState(false);
-  const [newCustomer, setNewCustomer] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    address: '',
-    drivingLicense: '',
-    licenseState: '',
-    dateOfBirth: ''
-  });
 
   useEffect(() => {
     fetchCustomers();
@@ -170,54 +161,6 @@ const CustomerManagement = ({ showDetails = false }) => {
       customer.phone.includes(searchText)
     );
   });
-
-  // Handle input change for new customer form
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewCustomer(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  // Handle form submission for new customer
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // In a real app, this would be an API call to create the customer
-    console.log('Creating new customer:', newCustomer);
-    
-    // Simulate successful creation
-    setTimeout(() => {
-      const newCustomerId = `cust${customers.length + 1}`;
-      const createdCustomer = {
-        id: newCustomerId,
-        firstName: newCustomer.firstName,
-        lastName: newCustomer.lastName,
-        email: newCustomer.email,
-        phone: newCustomer.phone,
-        status: 'active',
-        totalBookings: 0,
-        createdAt: new Date().toISOString().split('T')[0]
-      };
-      
-      setCustomers([...customers, createdCustomer]);
-      setShowAddCustomerModal(false);
-      setNewCustomer({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        address: '',
-        drivingLicense: '',
-        licenseState: '',
-        dateOfBirth: ''
-      });
-      
-      // Optionally, navigate to the new customer's details page
-      navigate(`/agent/customers/${newCustomerId}`);
-    }, 1000);
-  };
 
   if (isLoading && !showDetails) {
     return <div>Loading customers...</div>;
@@ -423,121 +366,35 @@ const CustomerManagement = ({ showDetails = false }) => {
       </div>
 
       {/* Add Customer Modal */}
-      {showAddCustomerModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2>Add New Customer</h2>
-              <button 
-                className="modal-close" 
-                onClick={() => setShowAddCustomerModal(false)}
-              >
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name *</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={newCustomer.firstName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name *</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={newCustomer.lastName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="email">Email *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={newCustomer.email}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Phone *</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={newCustomer.phone}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="address">Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  value={newCustomer.address}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="drivingLicense">Driver's License #</label>
-                  <input
-                    type="text"
-                    id="drivingLicense"
-                    name="drivingLicense"
-                    value={newCustomer.drivingLicense}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="licenseState">State/Province</label>
-                  <input
-                    type="text"
-                    id="licenseState"
-                    name="licenseState"
-                    value={newCustomer.licenseState}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="dateOfBirth">Date of Birth</label>
-                <input
-                  type="date"
-                  id="dateOfBirth"
-                  name="dateOfBirth"
-                  value={newCustomer.dateOfBirth}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-actions">
-                <button type="button" className="btn-cancel" onClick={() => setShowAddCustomerModal(false)}>
-                  Cancel
-                </button>
-                <button type="submit" className="btn-save">
-                  Create Customer
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <AddCustomerModal 
+        isOpen={showAddCustomerModal}
+        onClose={() => setShowAddCustomerModal(false)}
+        onAddCustomer={(customerData) => {
+          // In a real app, this would be an API call to create the customer
+          console.log('Creating new customer:', customerData);
+          
+          // Simulate successful creation
+          setTimeout(() => {
+            const newCustomerId = `cust${customers.length + 1}`;
+            const createdCustomer = {
+              id: newCustomerId,
+              firstName: customerData.firstName,
+              lastName: customerData.lastName,
+              email: customerData.email,
+              phone: customerData.phone,
+              status: 'active',
+              totalBookings: 0,
+              createdAt: new Date().toISOString().split('T')[0]
+            };
+            
+            setCustomers([...customers, createdCustomer]);
+            setShowAddCustomerModal(false);
+            
+            // Optionally, navigate to the new customer's details page
+            navigate(`/agent/customers/${newCustomerId}`);
+          }, 1000);
+        }}
+      />
     </div>
   );
 };

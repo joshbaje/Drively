@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './VehicleManagement.css';
 
 const VehicleManagement = () => {
@@ -184,9 +185,9 @@ const VehicleManagement = () => {
       <div className="vehicles-header">
         <h2>Vehicle Management</h2>
         <div className="vehicles-actions">
-          <button className="btn-primary">
+          <Link to="/admin/vehicles/create" className="btn-primary">
             <i className="fas fa-plus"></i> Add New Vehicle
-          </button>
+          </Link>
           <button className="btn-secondary">
             <i className="fas fa-download"></i> Export
           </button>

@@ -186,20 +186,34 @@ const AgentDashboard = () => {
       {/* Quick Actions */}
       <div className="quick-actions">
         <Link to="/agent/bookings/new" className="quick-action-btn">
-          <span className="quick-action-icon"><i className="fas fa-plus-circle"></i></span>
+          <div className="quick-action-icon">
+            <i className="fas fa-plus-circle"></i>
+          </div>
           <span className="quick-action-text">New Booking</span>
         </Link>
         <Link to="/agent/customers" className="quick-action-btn">
-          <span className="quick-action-icon"><i className="fas fa-user-plus"></i></span>
+          <div className="quick-action-icon">
+            <i className="fas fa-user-plus"></i>
+          </div>
           <span className="quick-action-text">Add Customer</span>
         </Link>
         <Link to="/agent/calls" className="quick-action-btn">
-          <span className="quick-action-icon"><i className="fas fa-phone-alt"></i></span>
+          <div className="quick-action-icon">
+            <i className="fas fa-phone-alt"></i>
+          </div>
           <span className="quick-action-text">Log Call</span>
         </Link>
         <Link to="/agent/bookings" className="quick-action-btn">
-          <span className="quick-action-icon"><i className="fas fa-search"></i></span>
+          <div className="quick-action-icon">
+            <i className="fas fa-search"></i>
+          </div>
           <span className="quick-action-text">Find Booking</span>
+        </Link>
+        <Link to="/agent/cars" className="quick-action-btn">
+          <div className="quick-action-icon">
+            <i className="fas fa-car"></i>
+          </div>
+          <span className="quick-action-text">Car Management</span>
         </Link>
       </div>
 
@@ -258,6 +272,7 @@ const AgentDashboard = () => {
             <Link to="/agent/bookings" className="section-action">View All</Link>
           </div>
           
+          <div className="table-responsive">
           <table className="data-table">
             <thead>
               <tr>
@@ -297,6 +312,7 @@ const AgentDashboard = () => {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>

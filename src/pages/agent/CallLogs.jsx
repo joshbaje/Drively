@@ -270,12 +270,6 @@ const CallLogs = () => {
   };
 
   const renderCallStatusBadge = (status) => {
-    const statusClasses = {
-      completed: 'status-completed',
-      follow_up_required: 'status-pending',
-      escalated: 'status-declined'
-    };
-    
     const statusLabels = {
       completed: 'Completed',
       follow_up_required: 'Follow-up Required',
@@ -283,7 +277,7 @@ const CallLogs = () => {
     };
     
     return (
-      <span className={`status-badge ${statusClasses[status] || ''}`}>
+      <span className={`call-status ${status}`}>
         {statusLabels[status] || status.replace('_', ' ')}
       </span>
     );
@@ -292,10 +286,10 @@ const CallLogs = () => {
   const renderCallOutcomeBadge = (outcome) => {
     const outcomeClasses = {
       information_provided: 'outcome-info',
-      booking_created: 'outcome-success',
-      issue_resolved: 'outcome-success',
-      booking_cancelled: 'outcome-warning',
-      escalated: 'outcome-danger',
+      booking_created: 'outcome-booking',
+      issue_resolved: 'outcome-resolved',
+      booking_cancelled: 'outcome-cancelled',
+      escalated: 'outcome-escalated',
       follow_up_scheduled: 'outcome-info'
     };
     
@@ -309,7 +303,7 @@ const CallLogs = () => {
     };
     
     return (
-      <span className={`outcome-badge ${outcomeClasses[outcome] || ''}`}>
+      <span className={`call-outcome ${outcomeClasses[outcome]}`}>
         {outcomeLabels[outcome] || outcome.replace('_', ' ')}
       </span>
     );
@@ -572,11 +566,11 @@ const CallLogs = () => {
     <div className="call-logs-container">
       <div className="call-logs-header">
         <div className="header-title">
-          <h2>Call Logs</h2>
+          <h2 className="call-logs-title">Call Logs</h2>
           <span className="call-count">{filteredCallLogs.length} calls</span>
         </div>
         <button 
-          className="btn-primary"
+          className="log-new-call-btn"
           onClick={handleNewCallClick}
         >
           <i className="fas fa-phone-plus"></i> Log New Call
@@ -632,8 +626,8 @@ const CallLogs = () => {
       ) : (
         <>
           {filteredCallLogs.length > 0 ? (
-            <div className="call-logs-table">
-              <table>
+            <div className="table-responsive">
+              <table className="call-logs-table">
                 <thead>
                   <tr>
                     <th>Date & Time</th>
@@ -663,7 +657,7 @@ const CallLogs = () => {
                       <td className="call-duration">{call.call_duration}</td>
                       <td className="call-actions">
                         <button 
-                          className="btn-view"
+                          className="view-button"
                           onClick={() => handleViewCallDetails(call)}
                         >
                           <i className="fas fa-eye"></i> View

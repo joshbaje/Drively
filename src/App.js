@@ -29,6 +29,9 @@ import OwnerDashboard from './pages/owner/dashboard/OwnerDashboard';
 // Admin Pages
 import AdminPage from './pages/admin/AdminPage';
 
+// Agent Pages
+import AgentPortal from './pages/agent/AgentPortal';
+
 function App() {
   return (
     <AuthProvider>
@@ -39,8 +42,22 @@ function App() {
             <Routes>
               {/* Admin Routes (no Navbar or Footer) */}
               <Route path="/admin/*" element={
-                <ProtectedRoute requiredRole="admin">
+                <ProtectedRoute requiredRole={["admin", "super_admin", "system_admin"]}>
                   <AdminPage />
+                </ProtectedRoute>
+              } />
+              
+              {/* Agent Routes (no Navbar or Footer) */}
+              <Route path="/agent/*" element={
+                <ProtectedRoute requiredRole={["support", "content_moderator"]}>
+                  <AgentPortal />
+                </ProtectedRoute>
+              } />
+              
+              {/* Renter Dashboard Route */}
+              <Route path="/renter-dashboard/*" element={
+                <ProtectedRoute requiredRole={["verified_renter"]}>
+                  <div>Renter Dashboard</div>
                 </ProtectedRoute>
               } />
               

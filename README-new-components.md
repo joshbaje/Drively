@@ -2,6 +2,26 @@
 
 This document outlines the new components and features that have been added to the Drivelyph car rental platform.
 
+## 0. Enhanced Car Form Modal
+
+**Location**: `src/components/agent/CarFormModal.jsx`
+
+A comprehensive modal form for adding and editing vehicles in the Agent Portal. Features include:
+
+- Detailed vehicle information capture with form validation
+- Registration information with VIN validation
+- Multiple image upload with previews and management
+- Dynamic feature management with add/remove functionality
+- Customizable vehicle status with contextual help
+- Success notifications and loading states
+- Form validation with helpful error messages
+
+**How to Use**:
+- Used in the Car Management page in the Agent Portal
+- Supports both adding new vehicles and editing existing ones
+- Handles image uploads and provides previews
+- Validates form data with appropriate error messaging
+
 ## 1. Payment Processing Page
 
 **Location**: `src/pages/payment/PaymentPage.jsx`
