@@ -511,6 +511,30 @@
   background-color: #f8f9fa;
 }
 
+/* Success message */
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.success-message i {
+  font-size: 18px;
+  color: #28a745;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Sidebar */
 .agent-sidebar {
   width: 200px;
@@ -637,14 +661,20 @@
 .header-actions {
   display: flex;
   align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 /* Agent Status */
 .agent-status {
   display: flex;
   align-items: center;
-  margin-right: 20px;
   font-size: 14px;
+  background-color: #f8f9fa;
+  padding: 6px 10px;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  z-index: 1;
 }
 
 .status-indicator {
@@ -652,6 +682,7 @@
   height: 10px;
   border-radius: 50%;
   margin-right: 8px;
+  display: inline-block;
 }
 
 .status-online {
@@ -680,6 +711,10 @@
   background-repeat: no-repeat;
   background-position: right 5px center;
   padding-right: 25px;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .agent-status-select:focus {
@@ -690,6 +725,12 @@
 .agent-user {
   display: flex;
   align-items: center;
+  background-color: #f8f9fa;
+  padding: 6px 10px;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1000;
 }
 
 .agent-avatar {
@@ -1808,6 +1849,13 @@
 
   .header-actions {
     margin-top: 15px;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .agent-status, .agent-user {
     width: 100%;
     justify-content: space-between;
   }

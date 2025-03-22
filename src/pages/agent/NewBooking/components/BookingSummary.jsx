@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useBooking from '../hooks/useBooking';
 
-const BookingSummary = () => {
+const BookingSummary = ({ isModal, onClose }) => {
   const navigate = useNavigate();
   const { 
     selectedCustomer,
@@ -38,8 +38,23 @@ const BookingSummary = () => {
     setTimeout(() => {
       const newBookingId = 'bk' + Math.floor(Math.random() * 100000);
       
-      // Redirect to booking details or confirmation page
-      navigate(`/agent/bookings/${newBookingId}`);
+      // If in modal mode, close the modal instead of redirecting
+      if (isModal && onClose) {
+        // Show success message
+        const event = new CustomEvent('bookingCreated', {
+          detail: {
+            message: `Booking ${newBookingId} created successfully for ${selectedVehicle.year} ${selectedVehicle.make} ${selectedVehicle.model}!`,
+            bookingId: newBookingId
+          }
+        });
+        window.dispatchEvent(event);
+        onClose();
+      } else {
+        // Redirect to booking details or confirmation page
+        navigate(`/agent/bookings/${newBookingId}`);
+      }
+      
+      setIsLoading(false);
     }, 1000);
   };
 
@@ -165,16 +180,16 @@ const BookingSummary = () => {
           <button 
             type="button" 
             className="back-btn"
-            onClick={() => setCurrentStep(2)}
+            onClick={() => isModal ? (onClose ? onClose() : setCurrentStep(2)) : setCurrentStep(2)}
           >
-            Back
+            {isModal ? 'Cancel' : 'Back'}
           </button>
           <button 
             type="button" 
             className="confirm-btn"
             onClick={handleSubmit}
           >
-            Confirm Booking
+            {isModal ? 'Create Booking' : 'Confirm Booking'}
           </button>
         </div>
       </div>

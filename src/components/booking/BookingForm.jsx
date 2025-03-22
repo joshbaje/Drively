@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './BookingForm.css';
 
-const BookingForm = ({ vehicleId, dailyRate, securityDeposit }) => {
+const BookingForm = ({ vehicleId, dailyRate, securityDeposit, vehicle }) => {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [specialRequests, setSpecialRequests] = useState('');
@@ -75,12 +77,35 @@ const BookingForm = ({ vehicleId, dailyRate, securityDeposit }) => {
       insuranceType: selectedInsurance,
       insuranceRate: insuranceOptions[selectedInsurance].rate,
       totalAmount,
-      specialRequests
+      specialRequests,
+      securityDeposit: securityDeposit
     };
     
     console.log('Booking submitted:', bookingData);
-    // Here you would typically send this data to your backend
-    alert('Your booking request has been submitted!');
+    
+    // Create a full booking details object to pass to the payment page
+    const bookingDetails = {
+      vehicleId: vehicleId,
+      vehicleName: vehicle ? `${vehicle.year} ${vehicle.make} ${vehicle.model}` : 'Vehicle',
+      startDate,
+      endDate,
+      daysCount: totalDays,
+      dailyRate,
+      subtotal: dailyRate * totalDays,
+      serviceFee: Math.round(dailyRate * totalDays * 0.10),
+      insuranceType: selectedInsurance,
+      insuranceFee: insuranceOptions[selectedInsurance].rate * totalDays,
+      taxAmount: Math.round(totalAmount - (totalAmount / 1.12)),
+      totalAmount,
+      securityDeposit,
+      specialRequests
+    };
+    
+    // Generate a fake booking ID
+    const bookingId = 'BK-' + Math.floor(100000 + Math.random() * 900000);
+    
+    // Navigate to payment page with booking details
+    navigate(`/payment/${bookingId}`, { state: { bookingDetails } });
   };
 
   // Get today's date in YYYY-MM-DD format for min attribute

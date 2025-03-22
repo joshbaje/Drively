@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BookingProvider } from './context/BookingContext';
 import useBooking from './hooks/useBooking';
@@ -12,7 +12,7 @@ import BookingDetailsForm from './components/BookingDetailsForm';
 import BookingSummary from './components/BookingSummary';
 
 // The inner component that uses the booking context
-const NewBookingContent = () => {
+const NewBookingContent = ({ isModal = false, onClose, preSelectedVehicleId }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { 
@@ -20,11 +20,18 @@ const NewBookingContent = () => {
     selectedVehicle, 
     selectedCustomer, 
     isLoading,
-    fetchCustomerById 
+    fetchCustomerById,
+    setSelectedVehicle,
+    fetchVehicleById
   } = useBooking();
 
   // Check for customer ID in URL or location state
   useEffect(() => {
+    // If a vehicle ID was passed, fetch and select that vehicle
+    if (preSelectedVehicleId) {
+      fetchVehicleById(preSelectedVehicleId);
+    }
+    
     if (location.state?.customerId) {
       fetchCustomerById(location.state.customerId);
     } else if (location.search) {
@@ -37,14 +44,18 @@ const NewBookingContent = () => {
   }, [location, fetchCustomerById]);
 
   return (
-    <div className="new-booking-container">
-      <div className="page-actions">
-        <button className="back-button" onClick={() => navigate(-1)}>
-          <i className="fas fa-arrow-left"></i> Back
-        </button>
-      </div>
-      
-      <h2 className="page-title">Create New Booking</h2>
+    <div className={`new-booking-container ${isModal ? 'modal-container' : ''}`}>
+      {!isModal && (
+        <>
+          <div className="page-actions">
+            <button className="back-button" onClick={() => navigate(-1)}>
+              <i className="fas fa-arrow-left"></i> Back
+            </button>
+          </div>
+          
+          <h2 className="page-title">Create New Booking</h2>
+        </>
+      )}
       
       <BookingSteps />
       
@@ -61,7 +72,7 @@ const NewBookingContent = () => {
         )}
         
         {currentStep === 3 && selectedVehicle && selectedCustomer && (
-          <BookingSummary />
+          <BookingSummary isModal={isModal} onClose={onClose} />
         )}
       </div>
       
@@ -76,10 +87,14 @@ const NewBookingContent = () => {
 };
 
 // The outer component that provides the context
-const NewBooking = () => {
+const NewBooking = ({ isModal = false, onClose, preSelectedVehicleId }) => {
   return (
     <BookingProvider>
-      <NewBookingContent />
+      <NewBookingContent 
+        isModal={isModal} 
+        onClose={onClose} 
+        preSelectedVehicleId={preSelectedVehicleId} 
+      />
     </BookingProvider>
   );
 };

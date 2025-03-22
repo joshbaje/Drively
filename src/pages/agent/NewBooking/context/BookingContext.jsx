@@ -83,6 +83,39 @@ export const BookingProvider = ({ children }) => {
     }, 500);
   };
 
+  // Fetch a specific vehicle by ID
+  const fetchVehicleById = (vehicleId) => {
+    setIsLoading(true);
+    // Simulating API call with setTimeout
+    setTimeout(() => {
+      const foundVehicle = vehicles.find(v => v.id === vehicleId);
+      
+      if (foundVehicle) {
+        setSelectedVehicle(foundVehicle);
+      } else {
+        // If not found in loaded vehicles, create a mock one (simulating API fetch)
+        const mockVehicle = {
+          id: vehicleId,
+          make: 'Toyota',
+          model: 'Camry',
+          year: 2022,
+          vehicle_type: 'sedan',
+          transmission: 'automatic',
+          daily_rate: 75,
+          security_deposit: 1000,
+          location: 'New York',
+          image_url: '/assets/images/cars/camry.jpg',
+          license_plate: 'ABC 1234',
+          seats: 5,
+          availability_status: 'available'
+        };
+        setSelectedVehicle(mockVehicle);
+      }
+      
+      setIsLoading(false);
+    }, 300);
+  };
+
   // Fetch a specific customer by ID
   const fetchCustomerById = (customerId) => {
     setIsLoading(true);
@@ -278,6 +311,7 @@ export const BookingProvider = ({ children }) => {
         setVehicleFilters,
         
         // Methods
+        fetchVehicleById,
         fetchCustomerById,
         filterVehicles,
         calculatePricing,

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Routes, Route, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './AgentPortal.css';
@@ -11,11 +11,37 @@ import NewBooking from './NewBooking';
 import CarManagement from './CarManagement';
 import CallLogs from './CallLogs';
 import AgentSettings from './AgentSettings';
+import AgentBookingBadge from '../../components/agent/AgentBookingBadge';
+import NewBookingModal from '../../components/agent/NewBookingModal';
+import FleetCalendarPage from './FleetCalendarPage';
+import VehicleCalendarPage from './calendar/VehicleCalendarPage';
 
 const AgentPortal = () => {
   const { user, logout } = useContext(AuthContext);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [agentStatus, setAgentStatus] = useState('online'); // online, busy, away
+  // State for success message display
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [showBookingBadge, setShowBookingBadge] = useState(false);
+  const [currentBooking, setCurrentBooking] = useState({
+    startDate: '3/10/2025',
+    endDate: '3/25/2025',
+    status: 'Confirmed'
+  });
+  const [showNewBookingModal, setShowNewBookingModal] = useState(false);
+  const [selectedVehicleId, setSelectedVehicleId] = useState(null);
+  
+  // Function to open booking modal
+  const openBookingModal = (vehicleId = null) => {
+    setSelectedVehicleId(vehicleId);
+    setShowNewBookingModal(true);
+  };
+  
+  // Function to close booking modal
+  const closeBookingModal = () => {
+    setShowNewBookingModal(false);
+    setSelectedVehicleId(null);
+  };
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,7 +51,64 @@ const AgentPortal = () => {
 
   const changeAgentStatus = (status) => {
     setAgentStatus(status);
+    // Show booking badge when status changes
+    setShowBookingBadge(true);
+    
+    // Hide booking badge after 5 seconds
+    setTimeout(() => {
+      setShowBookingBadge(false);
+    }, 5000);
   };
+  
+  // Effect to show booking badge on page load
+  // Effect to handle custom events from child components
+  useEffect(() => {
+    // Event listener for opening new booking modal from child components
+    const handleOpenNewBookingModal = () => {
+      openBookingModal();
+    };
+    
+    // Event listener for opening new booking modal with a specific vehicle
+    const handleOpenNewBookingWithVehicle = (event) => {
+      const { vehicleId } = event.detail;
+      openBookingModal(vehicleId);
+    };
+    
+    // Event listener for booking created success message
+    const handleBookingCreated = (event) => {
+      const { message, bookingId } = event.detail;
+      setSuccessMessage(message);
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 5000);
+    };
+    
+    // Add event listeners
+    window.addEventListener('openNewBookingModal', handleOpenNewBookingModal);
+    window.addEventListener('openNewBookingWithVehicle', handleOpenNewBookingWithVehicle);
+    window.addEventListener('bookingCreated', handleBookingCreated);
+    
+    // Clean up event listeners
+    return () => {
+      window.removeEventListener('openNewBookingModal', handleOpenNewBookingModal);
+      window.removeEventListener('openNewBookingWithVehicle', handleOpenNewBookingWithVehicle);
+      window.removeEventListener('bookingCreated', handleBookingCreated);
+    };
+  }, []);
+  
+  useEffect(() => {
+    // Show booking badge initially
+    setShowBookingBadge(true);
+    
+    // Hide booking badge after 5 seconds
+    const timer = setTimeout(() => {
+      setShowBookingBadge(false);
+    }, 5000);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -90,15 +173,21 @@ const AgentPortal = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/agent/bookings/new" className={isActive('/bookings/new') ? 'active' : ''}>
+            <a href="#" onClick={() => openBookingModal()} className={location.pathname === '/agent/bookings/new' ? 'active' : ''}>
               <span className="menu-icon"><i className="fas fa-plus-circle"></i></span>
               <span className="menu-text">New Booking</span>
-            </NavLink>
+            </a>
           </li>
           <li>
             <NavLink to="/agent/cars" className={isActive('/cars') ? 'active' : ''}>
               <span className="menu-icon"><i className="fas fa-car"></i></span>
               <span className="menu-text">Car Management</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/agent/fleet-calendar" className={isActive('/fleet-calendar') ? 'active' : ''}>
+              <span className="menu-icon"><i className="fas fa-calendar-alt"></i></span>
+              <span className="menu-text">Fleet Calendar</span>
             </NavLink>
           </li>
           <li>
@@ -139,6 +228,13 @@ const AgentPortal = () => {
                 <option value="busy">Busy</option>
                 <option value="away">Away</option>
               </select>
+              {showBookingBadge && (
+                <AgentBookingBadge 
+                  startDate={currentBooking.startDate}
+                  endDate={currentBooking.endDate}
+                  status={currentBooking.status}
+                />
+              )}
             </div>
             <div className="agent-user">
               <img 
@@ -153,6 +249,13 @@ const AgentPortal = () => {
             </div>
           </div>
         </div>
+        
+        {successMessage && (
+          <div className="success-message">
+            <i className="fas fa-check-circle"></i>
+            <span>{successMessage}</span>
+          </div>
+        )}
 
         <Routes>
           <Route path="/" element={<AgentDashboard />} />
@@ -161,13 +264,20 @@ const AgentPortal = () => {
           <Route path="/customers/:id" element={<CustomerManagement showDetails={true} />} />
           <Route path="/bookings" element={<BookingManagement />} />
           <Route path="/bookings/:id" element={<BookingManagement showDetails={true} />} />
-          <Route path="/bookings/new" element={<NewBooking />} />
-          <Route path="/bookings/new/*" element={<NewBooking />} />
           <Route path="/cars" element={<CarManagement />} />
           <Route path="/cars/:id" element={<CarManagement showDetails={true} />} />
+          <Route path="/cars/:vehicleId/calendar" element={<VehicleCalendarPage />} />
+          <Route path="/fleet-calendar" element={<FleetCalendarPage />} />
           <Route path="/calls" element={<CallLogs />} />
           <Route path="/settings" element={<AgentSettings />} />
         </Routes>
+        
+        {/* New Booking Modal */}
+        <NewBookingModal 
+          isOpen={showNewBookingModal} 
+          onClose={closeBookingModal} 
+          selectedVehicleId={selectedVehicleId} 
+        />
       </main>
     </div>
   );

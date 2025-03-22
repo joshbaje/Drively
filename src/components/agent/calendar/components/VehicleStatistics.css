@@ -1,0 +1,123 @@
+.vehicle-statistics {
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.statistics-title {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 12px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 12px;
+  font-size: 20px;
+  color: white;
+}
+
+.stat-card.utilization .stat-icon {
+  background-color: #2d9cdb;
+}
+
+.stat-card.bookings .stat-icon {
+  background-color: #27ae60;
+}
+
+.stat-card.revenue .stat-icon {
+  background-color: #f2c94c;
+}
+
+.stat-card.upcoming .stat-icon {
+  background-color: #9b59b6;
+}
+
+.stat-card.duration .stat-icon {
+  background-color: #f2994a;
+}
+
+.stat-card.unavailable .stat-icon {
+  background-color: #e74c3c;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+.stat-subtitle {
+  font-size: 12px;
+  color: #777;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card {
+    padding: 12px;
+  }
+  
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .stat-value {
+    font-size: 18px;
+  }
+}

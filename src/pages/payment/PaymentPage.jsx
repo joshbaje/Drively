@@ -30,25 +30,32 @@ const PaymentPage = () => {
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
   useEffect(() => {
-    // In a real app, you would fetch booking details from an API
-    // For now, use mock data or data passed via location state
-    const mockBookingDetails = location.state?.bookingDetails || {
-      vehicleId: 'v123',
-      vehicleName: '2022 Toyota Camry',
-      startDate: '2025-04-01',
-      endDate: '2025-04-05',
-      daysCount: 5,
-      dailyRate: 59.99,
-      subtotal: 299.95,
-      serviceFee: 29.99,
-      taxAmount: 33.00,
-      insuranceFee: 39.95,
-      totalAmount: 402.89,
-      securityDeposit: 200.00
-    };
-
-    setBookingDetails(mockBookingDetails);
-    setLoading(false);
+    // Check if we have booking details in location state
+    if (location.state?.bookingDetails) {
+      console.log('Booking details from state:', location.state.bookingDetails);
+      setBookingDetails(location.state.bookingDetails);
+      setLoading(false);
+    } else {
+      // If no booking details in state, use mock data (would fetch from API in real app)
+      console.log('No booking details in state, using mock data');
+      const mockBookingDetails = {
+        vehicleId: 'v123',
+        vehicleName: '2022 Toyota Camry',
+        startDate: '2025-04-01',
+        endDate: '2025-04-05',
+        daysCount: 5,
+        dailyRate: 59.99,
+        subtotal: 299.95,
+        serviceFee: 29.99,
+        taxAmount: 33.00,
+        insuranceFee: 39.95,
+        totalAmount: 402.89,
+        securityDeposit: 200.00
+      };
+      
+      setBookingDetails(mockBookingDetails);
+      setLoading(false);
+    }
   }, [bookingId, location.state]);
 
   // Function to detect card type based on first digits

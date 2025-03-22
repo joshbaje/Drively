@@ -23,6 +23,16 @@
   padding: 0;
 }
 
+.booking-modal {
+  max-width: 900px;
+  width: 95%;
+}
+
+.modal-container .new-booking-container {
+  padding: 0;
+  margin: 0;
+}
+
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -1104,6 +1114,27 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Modal New Booking Styles */
+.modal-container .booking-steps {
+  padding: 0 20px;
+}
+
+.modal-container .booking-form-container {
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.modal-container .form-actions {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eee;
+  margin-top: 0;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: -20px;
 }
 
 /* Responsive Adjustments */

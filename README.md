@@ -8,6 +8,78 @@ The application includes both a customer-facing website and an admin/agent porta
 
 ## Recent Updates
 
+### Booking Process Improvements (March 2025)
+
+- **Fixed Booking Flow**: Resolved issue with the booking process flow from vehicle details to payment page
+- **Enhanced Data Passing**: Improved how booking details are passed between components
+- **Vehicle Details Integration**: Better integration of vehicle information in the booking process
+- **Seamless Navigation**: Created smooth transition between booking form and payment page
+
+The booking process now follows a proper flow:
+1. User selects dates and insurance on the vehicle details page
+2. Form validation ensures all required information is provided
+3. User is automatically redirected to the payment page with all booking details
+4. After payment, user receives a booking confirmation
+
+See [Booking-Process-README.md](./Booking-Process-README.md) for detailed documentation on the booking system.
+
+
+
+### UI Enhancements and Fixes (March 2025)
+
+- **Agent Portal Header Improvements**:
+  - Fixed status indicator styling and position issues
+  - Added booking badge notification system
+  - Enhanced responsive layout for better mobile display
+  - Improved visual separation of user controls
+  
+- **Vehicle Calendar UI Enhancements**:
+  - Fixed layout issues with the vehicle info bar
+  - Improved responsive behavior for small screens
+  - Better spacing and alignment for calendar components
+  - Fixed overlap issues with dynamic content
+  
+- **General UI Improvements**:
+  - Refined component styling for better consistency
+  - Fixed z-index issues causing element overlaps
+  - Enhanced responsive behavior across all agent portal screens
+  - Improved visual hierarchy for better UX
+
+### Fleet Calendar Management
+
+A new Fleet Calendar feature has been added to the Agent Portal, enabling agents to:
+
+- View all vehicle bookings and availability in one comprehensive calendar
+- See the number of booked and available vehicles for each day
+- Get detailed information about which vehicles are booked or available on any date
+- Filter between all vehicles, booked vehicles, or available vehicles
+- Quickly access vehicle details or individual calendars
+
+This feature significantly improves fleet management capabilities by providing a bird's-eye view of the entire fleet's scheduling and availability.
+
+**How to Access**:
+1. Go to the Agent Portal
+2. Click on "Fleet Calendar" in the sidebar menu
+
+### Vehicle Calendar Management
+
+A new vehicle calendar management feature has been added to the Agent Portal, allowing agents to:
+
+- View a vehicle's availability calendar in monthly or weekly views
+- See existing bookings and unavailability periods
+- Add new unavailability periods (e.g., for maintenance)
+- Manage and delete unavailability exceptions
+- View detailed booking information for specific dates
+- Access vehicle statistics like utilization rate and revenue
+
+This feature provides agents with a visual tool to manage vehicle availability, helping to prevent booking conflicts and manage vehicle maintenance schedules more effectively.
+
+**How to Access**:
+1. Go to the Agent Portal
+2. Navigate to Car Management
+3. Click the calendar icon on any vehicle card, or
+4. View a vehicle's details and click "View Availability"
+
 ### Add New Car Modal in Agent Portal
 
 The Add New Car modal in the Agent Portal's Car Management page has been significantly enhanced with the following features:
@@ -116,10 +188,19 @@ src/
   │   ├── agent/      # Agent portal components
   │   ├── common/     # Shared UI components
   │   ├── booking/    # Booking-related components
+  │   │   ├── BookingForm.jsx      # Date selection and booking creation
+  │   │   └── BookingForm.css      # Styles for booking form
   │   └── vehicle/    # Vehicle-related components
+  │       ├── VehicleDetailsPage.jsx  # Vehicle details with booking form
+  │       └── ...     # Other vehicle components
   ├── pages/
   │   ├── admin/      # Admin portal pages
   │   ├── agent/      # Agent portal pages
+  │   ├── booking/    # Booking pages
+  │   │   ├── BookingsPage.jsx     # List of user bookings
+  │   │   └── ConfirmationPage.jsx # Booking confirmation details
+  │   ├── payment/    # Payment pages
+  │   │   └── PaymentPage.jsx      # Payment processing
   │   └── ...         # Other pages
   ├── context/        # React context providers
   ├── hooks/          # Custom React hooks
@@ -143,9 +224,10 @@ src/
    - Support bulk operations for fleet management
 
 3. **Booking Improvements**
-   - Multi-step booking process
-   - Integration with payment gateways
+   - ✅ Multi-step booking process (Implemented March 2025)
+   - Integration with payment gateways (Simulated UI complete, API integration pending)
    - Support for recurring bookings
+   - Booking modification and cancellation workflows
 
 4. **User Management**
    - Enhanced customer profiles

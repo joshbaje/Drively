@@ -2,7 +2,7 @@ import React from 'react';
 import useBooking from '../hooks/useBooking';
 import { locationOptions, timeOptions } from '../data/mockData';
 
-const BookingDetailsForm = () => {
+const BookingDetailsForm = ({ isModal, onClose }) => {
   const { 
     selectedVehicle,
     bookingData,
@@ -188,9 +188,9 @@ const BookingDetailsForm = () => {
             <button 
               type="button" 
               className="back-btn"
-              onClick={() => setCurrentStep(1)}
+              onClick={() => isModal ? (onClose ? onClose() : setCurrentStep(1)) : setCurrentStep(1)}
             >
-              Back
+              {isModal ? 'Cancel' : 'Back'}
             </button>
             <button 
               type="button" 

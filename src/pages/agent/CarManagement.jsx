@@ -331,9 +331,9 @@ const CarManagement = ({ showDetails = false }) => {
             <button className="action-button edit">
               <i className="fas fa-edit"></i> Edit Car Details
             </button>
-            <button className="action-button schedule">
+            <Link to={`/agent/cars/${selectedCar.id}/calendar`} className="action-button schedule">
               <i className="fas fa-calendar-alt"></i> View Availability
-            </button>
+            </Link>
             <button className="action-button book">
               <i className="fas fa-plus-circle"></i> Create Booking
             </button>
@@ -416,6 +416,9 @@ const CarManagement = ({ showDetails = false }) => {
               <div className="car-buttons">
                 <Link to={`/agent/cars/${car.id}`} className="table-action-btn">
                   <i className="fas fa-eye"></i>
+                </Link>
+                <Link to={`/agent/cars/${car.id}/calendar`} className="table-action-btn">
+                  <i className="fas fa-calendar-alt"></i>
                 </Link>
                 <button 
                   className="table-action-btn"

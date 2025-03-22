@@ -516,7 +516,7 @@ Please note that the car is equipped with a GPS tracker for security purposes.`,
                   </div>
                 </div>
                 
-                <BookingForm vehicleId={vehicle.id} dailyRate={vehicle.dailyRate} securityDeposit={vehicle.securityDeposit} />
+                <BookingForm vehicleId={vehicle.id} dailyRate={vehicle.dailyRate} securityDeposit={vehicle.securityDeposit} vehicle={vehicle} />
                 
                 <div className="rate-details">
                   <div className="rate-item">

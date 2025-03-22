@@ -3,6 +3,23 @@
 ## Current Status
 The application is a car rental platform with an admin panel that allows for management of vehicles, users, and bookings. The frontend is built using React with React Router for navigation. The backend API integration is currently in development/mock stage.
 
+## Recent Updates: Fleet Calendar Management
+
+A new Fleet Calendar has been added to the Agent Portal. This feature provides agents with a comprehensive view of all vehicles in the fleet, allowing them to see bookings and availability across all vehicles in a single calendar view. Key features include:
+
+- **Fleet-wide Calendar View**: View availability and bookings for all vehicles in a monthly calendar format
+- **Vehicle Availability Tracking**: See how many vehicles are available or booked on any given day
+- **Detailed Daily View**: Click on any day to see detailed information about vehicle availability and bookings
+- **Vehicle Filtering**: Toggle between viewing all vehicles, only booked vehicles, or only available vehicles
+- **Quick Actions**: Access vehicle details, individual calendars, or create new bookings directly from the calendar
+
+This feature helps agents efficiently manage the entire fleet and make informed decisions about bookings and vehicle availability.
+
+## Recent Updates: Vehicle Calendar Management
+A new vehicle calendar management feature has been added to the Agent Portal. This feature provides a visual way to manage vehicle availability, bookings, and maintenance periods. It allows agents to view a monthly or weekly calendar for each vehicle, showing when the vehicle is booked or unavailable. Agents can add new unavailability periods (for example, when a vehicle needs maintenance) and view detailed information about bookings on specific dates.
+
+The calendar feature also includes a statistics dashboard that shows key metrics about the vehicle, such as utilization rate, total revenue, and upcoming bookings. This helps agents get a quick overview of the vehicle's performance and availability status.
+
 ## Recent Updates: Add New Car Feature
 The most recent addition is the "Add New Car" feature which allows administrators to add new vehicles to the system. The implementation includes a comprehensive form for vehicle details, image uploads, features management, and status selection.
 

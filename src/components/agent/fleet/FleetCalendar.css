@@ -1,0 +1,546 @@
+.fleet-calendar-container {
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+}
+
+.fleet-header {
+  margin-bottom: 15px;
+}
+
+.fleet-title {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.fleet-stats {
+  display: flex;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  min-width: 80px;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Calendar Styles */
+.fleet-calendar {
+  margin-bottom: 15px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.current-month {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.month-nav {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s;
+}
+
+.month-nav:hover {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.calendar-weekdays div {
+  text-align: center;
+  font-weight: 600;
+  color: #555;
+  padding: 4px 0;
+  font-size: 12px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day {
+  position: relative;
+  aspect-ratio: 1/1;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 30px;
+}
+
+.calendar-day.empty {
+  background-color: transparent;
+  border: none;
+  cursor: default;
+}
+
+.calendar-day:not(.empty):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-day.selected {
+  border-color: #FB9EC6;
+  box-shadow: 0 0 0 2px rgba(251, 158, 198, 0.3);
+}
+
+.calendar-day.all-available {
+  background-color: rgba(39, 174, 96, 0.1);
+  border-color: rgba(39, 174, 96, 0.3);
+}
+
+.calendar-day.mixed {
+  background-color: rgba(242, 201, 76, 0.1);
+  border-color: rgba(242, 201, 76, 0.3);
+}
+
+.calendar-day.all-booked {
+  background-color: rgba(235, 87, 87, 0.1);
+  border-color: rgba(235, 87, 87, 0.3);
+}
+
+.day-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.booking-summary {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #666;
+}
+
+.booking-count, .available-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Calendar Legend */
+.calendar-legend {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.legend-color.all-available {
+  background-color: rgba(39, 174, 96, 0.2);
+  border: 1px solid rgba(39, 174, 96, 0.4);
+}
+
+.legend-color.mixed {
+  background-color: rgba(242, 201, 76, 0.2);
+  border: 1px solid rgba(242, 201, 76, 0.4);
+}
+
+.legend-color.all-booked {
+  background-color: rgba(235, 87, 87, 0.2);
+  border: 1px solid rgba(235, 87, 87, 0.4);
+}
+
+/* Selected Date Details */
+.selected-date-details {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 15px;
+}
+
+.date-header {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.date-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.date-stat {
+  background-color: white;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.date-stat .stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.date-stat .stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.vehicles-toggle {
+  display: flex;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-right: 1px solid #e0e0e0;
+}
+
+.toggle-btn:last-child {
+  border-right: none;
+}
+
+.toggle-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.toggle-btn.active {
+  background-color: #FB9EC6;
+  color: white;
+}
+
+.vehicles-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.vehicle-card {
+  display: flex;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.vehicle-card:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.vehicle-card.booked {
+  border-left: 4px solid #f39c12;
+}
+
+.vehicle-card.available {
+  border-left: 4px solid #27ae60;
+}
+
+.vehicle-image {
+  width: 80px;
+  height: 80px;
+  padding: 5px;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.vehicle-info {
+  flex: 1;
+  padding: 8px 5px;
+  border-right: 1px solid #f0f0f0;
+}
+
+.vehicle-title {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.vehicle-details {
+  font-size: 11px;
+  color: #666;
+}
+
+.vehicle-plate {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.vehicle-location {
+  margin-bottom: 2px;
+}
+
+.vehicle-rate {
+  font-weight: 600;
+  color: #2d9cdb;
+}
+
+.vehicle-status {
+  width: 130px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid #f0f0f0;
+}
+
+.booking-info {
+  font-size: 11px;
+  color: #666;
+}
+
+.booking-customer {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.booking-dates {
+  margin-bottom: 2px;
+}
+
+.booking-status {
+  display: inline-block;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.booking-status.confirmed {
+  background-color: #e6f7ee;
+  color: #27ae60;
+}
+
+.booking-status.pending {
+  background-color: #fef3e0;
+  color: #f39c12;
+}
+
+.availability-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.availability-badge.available {
+  background-color: #e6f7ee;
+  color: #27ae60;
+}
+
+.vehicle-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  color: #555;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.action-btn.view:hover {
+  color: #2d9cdb;
+}
+
+.action-btn.calendar:hover {
+  color: #9b59b6;
+}
+
+.action-btn.book:hover {
+  color: #27ae60;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #777;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #FB9EC6;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .vehicles-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .date-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .fleet-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .stat-item {
+    width: 100%;
+  }
+  
+  .vehicle-card {
+    flex-wrap: wrap;
+  }
+  
+  .vehicle-image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .vehicle-info {
+    width: calc(100% - 80px);
+    border-right: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .vehicle-status {
+    width: 100%;
+    padding: 8px 12px;
+    border-right: none;
+  }
+  
+  .vehicle-actions {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-days {
+    gap: 4px;
+  }
+  
+  .calendar-day {
+    padding: 4px;
+  }
+  
+  .day-number {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  .booking-summary {
+    font-size: 10px;
+  }
+  
+  .date-stats {
+    grid-template-columns: 1fr;
+  }
+}
