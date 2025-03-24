@@ -6,7 +6,7 @@ This document provides guidelines and strategies for integrating Drively with ba
 
 Drively uses a flexible API service architecture that allows seamless switching between different backend implementations. This makes it easier to migrate from one backend service to another without requiring significant changes to the frontend codebase.
 
-Currently, the application uses Xano as its backend service, but preparations have been made for a potential migration to Supabase in the future.
+Currently, the application uses Xano as its backend service, but substantial progress has been made on the Supabase integration. The infrastructure is in place to support both backend providers.
 
 ## Architecture
 
@@ -40,17 +40,17 @@ https://x8ki-letl-twmt.n7.xano.io/api:scA8Isc8
 
 API requests are authenticated using JWT tokens stored in local storage. The token is included in the `Authorization` header as a Bearer token.
 
-## Future Migration (Supabase)
+## Supabase Integration
 
-Preparation for Supabase migration includes:
+The Supabase integration includes:
 
 1. A complete implementation of the same API interface using Supabase client
 2. Environment variable configuration for switching between implementations
 3. Required dependencies already added to the project
+4. A provider-agnostic database connection layer (`src/database/connection.js`)
+5. A test component for verifying Supabase connection (`src/components/SupabaseConnectionTest.js`)
 
-### Migration Steps
-
-When ready to migrate to Supabase:
+### Setting Up Supabase:
 
 1. Set up a Supabase project and configure the database schema
 2. Add Supabase credentials to environment variables:
@@ -140,20 +140,32 @@ To test the API integration:
 2. Test authentication flows thoroughly
 3. Verify data CRUD operations for all resources
 4. Test error conditions and edge cases
+5. For Supabase-specific testing, navigate to the `/supabase-test` route
 
 ## Environment Variables
 
 Configure the API integration using these environment variables:
 
 - `REACT_APP_API_PROVIDER`: Set to 'xano' or 'supabase'
-- `REACT_APP_XANO_BASE_URL`: Xano API base URL
+- `REACT_APP_XANO_API_URL`: Xano API base URL (currently https://x8ki-letl-twmt.n7.xano.io/api:scA8Isc8)
+- `REACT_APP_XANO_TOKEN_KEY`: Storage key for Xano auth token (default: 'auth_token')
 - `REACT_APP_SUPABASE_URL`: Supabase project URL
 - `REACT_APP_SUPABASE_ANON_KEY`: Supabase anonymous key
+
+A sample `.env.example` file is included with the project to show the required configuration.
 
 ## Best Practices
 
 1. Always use the API service through the main export (`src/services/api/index.js`)
-2. Handle loading and error states in UI components
-3. Keep API call logic in hooks or context providers, not directly in components
-4. Use consistent error handling patterns
-5. Log non-sensitive information for debugging
+2. For database operations, use the abstraction layer in `src/database/connection.js`
+3. Handle loading and error states in UI components
+4. Keep API call logic in hooks or context providers, not directly in components
+5. Use consistent error handling patterns
+6. Log non-sensitive information for debugging
+7. Use the example hooks (like `src/hooks/useVehiclesExample.js`) as a reference
+
+## Additional Resources
+
+- [Supabase Integration Guide](./Supabase-Integration-Guide.md): Detailed guide for the Supabase integration
+- [Supabase MCP Setup](./Supabase-MCP-Setup.md): Instructions for setting up the Supabase MCP
+- [Database-Integration-Summary.md](./Database-Integration-Summary.md): Overview of the database integration architecture

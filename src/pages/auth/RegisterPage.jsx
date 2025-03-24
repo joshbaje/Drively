@@ -332,7 +332,7 @@ const RegisterPage = () => {
                 <label htmlFor="confirm_password">Confirm Password <span className="required">*</span></label>
                 <div className="password-input-container">
                   <input
-                    type={showConfirmPassword ? "text" : "password"}
+                    type="password"
                     id="confirm_password"
                     name="confirm_password"
                     value={formData.confirm_password}

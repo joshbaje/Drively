@@ -1,0 +1,258 @@
+.supabase-functions-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.functions-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.functions-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #2D3748;
+}
+
+.functions-header p {
+  font-size: 1.1rem;
+  color: #4A5568;
+  margin-bottom: 20px;
+}
+
+.functions-search-bar {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.functions-search-bar input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #CBD5E0;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.functions-search-bar input:focus {
+  outline: none;
+  border-color: #3182CE;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+}
+
+.functions-content {
+  display: flex;
+  gap: 30px;
+}
+
+.functions-sidebar {
+  flex: 0 0 200px;
+  background-color: #F7FAFC;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.functions-sidebar h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #2D3748;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E2E8F0;
+  margin-bottom: 8px;
+}
+
+.functions-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.functions-sidebar li {
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #4A5568;
+  cursor: pointer;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.functions-sidebar li:hover {
+  background-color: #EDF2F7;
+}
+
+.functions-sidebar li.active {
+  font-weight: 600;
+}
+
+.function-count {
+  background-color: #E2E8F0;
+  color: #4A5568;
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+.functions-main {
+  flex: 1;
+}
+
+.functions-main h2 {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #2D3748;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.functions-main h2 .function-count {
+  margin-left: 10px;
+  background-color: #E2E8F0;
+}
+
+.functions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.function-card {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.function-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.function-header {
+  padding: 12px 16px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.function-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.function-category {
+  font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.function-content {
+  padding: 16px;
+}
+
+.function-description {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #4A5568;
+  font-size: 0.95rem;
+}
+
+.function-details {
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  display: grid;
+  gap: 6px;
+}
+
+.detail strong {
+  color: #2D3748;
+}
+
+.function-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.copy-button, .view-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3182CE;
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.copy-button:hover, .view-button:hover {
+  background-color: #2C5282;
+}
+
+.view-button {
+  background-color: #4A5568;
+}
+
+.view-button:hover {
+  background-color: #2D3748;
+}
+
+.function-sql {
+  background-color: #F7FAFC;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  max-height: 100px;
+  transition: max-height 0.3s;
+  position: relative;
+  margin: 0;
+}
+
+.function-sql.expanded {
+  max-height: 500px;
+}
+
+.function-sql code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: pre;
+}
+
+.no-functions {
+  text-align: center;
+  padding: 40px;
+  color: #718096;
+  font-size: 1.1rem;
+  background-color: #F7FAFC;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .functions-content {
+    flex-direction: column;
+  }
+  
+  .functions-sidebar {
+    flex: none;
+  }
+  
+  .functions-list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import ApiService from '../services/api';
+import supabase from '../services/supabase/supabaseClient';
 
 export const AuthContext = createContext();
 
@@ -10,13 +11,33 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Check if token exists and verify it
+    // Set up auth state change listener for Supabase
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+          setToken(session.access_token);
+          localStorage.setItem('auth_token', session.access_token);
+          fetchCurrentUser();
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null);
+          setToken(null);
+          localStorage.removeItem('auth_token');
+        }
+      }
+    );
+
+    // Initial check if token exists and verify it
     if (token) {
       fetchCurrentUser();
     } else {
       setLoading(false);
     }
-  }, [token]);
+
+    // Cleanup subscription
+    return () => {
+      subscription?.unsubscribe();
+    };
+  }, []);
 
   const fetchCurrentUser = async () => {
     try {
@@ -62,9 +83,9 @@ export const AuthProvider = ({ children }) => {
       if (data.authToken) {
         localStorage.setItem('auth_token', data.authToken);
         setToken(data.authToken);
+        setUser(data.user);
       }
       
-      setUser(data.user);
       setError(null);
       return data;
     } catch (err) {
@@ -75,11 +96,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    ApiService.auth.logout();
-    localStorage.removeItem('auth_token');
-    setToken(null);
-    setUser(null);
+  const logout = async () => {
+    try {
+      await ApiService.auth.logout();
+      localStorage.removeItem('auth_token');
+      setToken(null);
+      setUser(null);
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
   };
 
   const updateUserProfile = async (profileData) => {
@@ -124,8 +149,8 @@ export const AuthProvider = ({ children }) => {
         updateUserProfile,
         resetPassword,
         isAuthenticated: !!user,
-        isOwner: user?.user_type === 'verified_owner' || user?.user_type === 'fleet_manager',
-        isRenter: user?.user_type === 'verified_renter',
+        isOwner: user?.user_type === 'owner' || user?.user_type === 'verified_owner' || user?.user_type === 'fleet_manager',
+        isRenter: user?.user_type === 'renter' || user?.user_type === 'verified_renter',
         isAdmin: user?.user_type === 'admin' || user?.user_type === 'super_admin' || user?.user_type === 'system_admin',
         isAgent: user?.user_type === 'support' || user?.user_type === 'content_moderator'
       }}

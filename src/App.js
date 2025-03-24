@@ -18,6 +18,9 @@ import SearchPage from './pages/SearchPage';
 import VehicleDetailsPage from './components/vehicle/VehicleDetailsPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import SupabaseConnectionTest from './components/SupabaseConnectionTest';
+import SupabaseLoginTest from './components/auth/SupabaseLoginTest';
+import SupabaseFunctions from './pages/SupabaseFunctions/SupabaseFunctions';
 import ListVehiclePage from './pages/owner/ListVehiclePage';
 import ProfilePage from './pages/profile/ProfilePage';
 import BookingsPage from './pages/booking/BookingsPage';
@@ -139,6 +142,11 @@ function App() {
                           <div>Notifications Page</div>
                         </ProtectedRoute>
                       } />
+                      
+                      {/* Supabase Routes */}
+                      <Route path="/supabase-test" element={<SupabaseConnectionTest />} />
+                      <Route path="/supabase-auth-test" element={<SupabaseLoginTest />} />
+                      <Route path="/supabase-functions" element={<SupabaseFunctions />} />
                       
                       {/* 404 Not Found */}
                       <Route path="*" element={

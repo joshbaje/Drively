@@ -1,8 +1,8 @@
 /**
- * Database Configuration for Drively
+ * Supabase Configuration for Drively
  * 
- * This file contains configuration settings for different database environments.
- * It provides connection parameters and settings for both Xano and Supabase backends.
+ * This file contains configuration settings for different Supabase environments.
+ * It provides connection parameters and settings for the Supabase backend.
  */
 
 const ENVIRONMENTS = {
@@ -13,26 +13,7 @@ const ENVIRONMENTS = {
 
 const currentEnv = process.env.NODE_ENV || ENVIRONMENTS.development;
 
-// Xano configuration
-const xanoConfig = {
-  development: {
-    baseUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:scA8Isc8',
-    tokenKey: 'auth_token',
-    debug: true
-  },
-  production: {
-    baseUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:scA8Isc8',
-    tokenKey: 'auth_token',
-    debug: false
-  },
-  test: {
-    baseUrl: 'https://x8ki-letl-twmt.n7.xano.io/api:scA8Isc8',
-    tokenKey: 'auth_token',
-    debug: true
-  }
-};
-
-// Supabase configuration
+// Supabase configuration for each environment
 const supabaseConfig = {
   development: {
     url: process.env.REACT_APP_SUPABASE_URL || 'https://your-supabase-project.supabase.co',
@@ -51,25 +32,13 @@ const supabaseConfig = {
   }
 };
 
-// Determine which provider to use
-const getProviderType = () => {
-  return process.env.REACT_APP_API_PROVIDER || 'xano';
-};
-
-// Get configuration for the current environment and provider
+// Get configuration for the current environment
 const getConfig = () => {
-  const provider = getProviderType();
-  
-  if (provider === 'supabase') {
-    return supabaseConfig[currentEnv];
-  }
-  
-  return xanoConfig[currentEnv];
+  return supabaseConfig[currentEnv];
 };
 
 export default {
   ENVIRONMENTS,
   currentEnv,
-  getConfig,
-  getProviderType
+  getConfig
 };
