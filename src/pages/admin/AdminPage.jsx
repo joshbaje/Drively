@@ -21,6 +21,8 @@ const AdminPage = () => {
       setActiveTab('vehicles');
     } else if (path.includes('/admin/bookings')) {
       setActiveTab('bookings');
+    } else if (path.includes('/admin/database')) {
+      setActiveTab('database');
     } else {
       setActiveTab('dashboard');
     }
@@ -82,6 +84,13 @@ const AdminPage = () => {
           
           <div className="nav-section">
             <h3>Advanced</h3>
+            <Link 
+              to="/admin/database" 
+              className={`nav-link ${activeTab === 'database' ? 'active' : ''}`}
+              onClick={() => setActiveTab('database')}
+            >
+              <i className="fas fa-database"></i> Database
+            </Link>
             <Link 
               to="/admin/settings" 
               className={`nav-link ${activeTab === 'settings' ? 'active' : ''}`}

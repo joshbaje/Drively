@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './AuthPages.css';
 
@@ -7,71 +7,25 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  
-  // Check for message from the registration page
-  const registrationMessage = location.state?.message;
-  
-  // Get the redirect path from location state, or default to homepage
-  const from = location.state?.from?.pathname || '/';
-
-  // Show registration success message if present
-  React.useEffect(() => {
-    if (registrationMessage) {
-      setSuccess(registrationMessage);
-      // Clear the message after 5 seconds
-      const timer = setTimeout(() => setSuccess(''), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [registrationMessage]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validate form
-    if (!email || !password) {
-      setError('Please enter both email and password');
-      return;
-    }
-    
+    setError('');
+    setLoading(true);
+
     try {
-      setIsSubmitting(true);
-      setError('');
-      
-      // Call login from AuthContext
-      const loginData = await login(email, password);
-      
-      // Determine redirect based on user role
-      let redirectPath = from;
-      
-      // If the user has a specific role, redirect to their dashboard
-      const userType = loginData?.user?.user_type;
-      
-      if (userType) {
-        if (userType === 'admin' || userType === 'super_admin' || userType === 'system_admin') {
-          redirectPath = '/admin';
-        } else if (userType === 'support' || userType === 'content_moderator') {
-          redirectPath = '/agent/dashboard';
-        } else if (userType === 'verified_owner' || userType === 'fleet_manager') {
-          redirectPath = '/owner/dashboard';
-        } else if (userType === 'verified_renter') {
-          redirectPath = '/renter-dashboard';
-        }
-      }
-      
-      // Login successful, redirect
-      navigate(redirectPath, { replace: true });
+      await login(email, password);
+      navigate('/'); // Redirect to home or dashboard
     } catch (err) {
-      setError(err.message || 'Login failed. Please check your credentials.');
+      setError(err.message);
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -84,7 +38,6 @@ const LoginPage = () => {
         </div>
         
         {error && <div className="auth-error">{error}</div>}
-        {success && <div className="auth-success">{success}</div>}
         
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
@@ -144,9 +97,9 @@ const LoginPage = () => {
           <button 
             type="submit" 
             className="create-account-button"
-            disabled={isSubmitting}
+            disabled={loading}
           >
-            {isSubmitting ? 'SIGNING IN...' : 'SIGN IN'}
+            {loading ? 'SIGNING IN...' : 'SIGN IN'}
           </button>
         </form>
         

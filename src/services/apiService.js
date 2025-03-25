@@ -24,13 +24,40 @@ class ApiService {
 
   // Authentication endpoints
   async login(email, password) {
-    const response = await fetch(`${this.baseUrl}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
+    // Check if we should use Supabase directly
+    // Check both the environment variable and fallback to true to ensure we use Supabase
+    const useSupabase = process.env.REACT_APP_API_PROVIDER === 'supabase' || true;
+    console.log('API Provider:', process.env.REACT_APP_API_PROVIDER, 'Using Supabase:', useSupabase);
     
-    return this.handleResponse(response);
+    if (useSupabase) {
+      // Import Supabase services dynamically to avoid circular dependencies
+      const supabaseAuth = await import('./supabase/auth/authService').then(module => module.default);
+      
+      console.log('Using Supabase directly for authentication');
+      const result = await supabaseAuth.signIn(email, password);
+      
+      if (result.error) {
+        console.error('Supabase login error:', result.error);
+        throw new Error(result.error.message || 'Login failed');
+      }
+      
+      // Format response to match expected format from Xano for compatibility
+      return {
+        authToken: result.data?.session?.access_token,
+        user: result.data?.user,
+        session: result.data?.session
+      };
+    } else {
+      // Legacy Xano API flow
+      console.log('Using legacy Xano API for authentication');
+      const response = await fetch(`${this.baseUrl}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      
+      return this.handleResponse(response);
+    }
   }
 
   async getCurrentUser() {

@@ -19,7 +19,28 @@
 .functions-header p {
   font-size: 1.1rem;
   color: #4A5568;
+  margin-bottom: 15px;
+}
+
+.supabase-dashboard-link {
   margin-bottom: 20px;
+}
+
+.supabase-dashboard-link a {
+  display: inline-block;
+  color: #3182CE;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border: 1px solid #3182CE;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.supabase-dashboard-link a:hover {
+  background-color: #3182CE;
+  color: white;
 }
 
 .functions-search-bar {

@@ -6,6 +6,7 @@ import AdminDashboard from './AdminDashboard';
 import UserManagement from './UserManagement';
 import VehicleManagement from './VehicleManagement';
 import BookingManagement from './BookingManagement';
+import DatabaseManager from './DatabaseManager';
 
 // Vehicle Management Routes
 import VehicleCreate from '../../pages/admin/VehicleCreate';
@@ -19,6 +20,7 @@ const AdminRoutes = () => {
       <Route path="/vehicles" element={<VehicleManagement />} />
       <Route path="/vehicles/create" element={<VehicleCreate />} />
       <Route path="/bookings" element={<BookingManagement />} />
+      <Route path="/database" element={<DatabaseManager />} />
       <Route path="*" element={
         <div className="not-found-content">
           <h2>404 - Admin Page Not Found</h2>

@@ -1,0 +1,265 @@
+.database-manager {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.manager-controls {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.section {
+  flex: 1;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.danger-section {
+  background-color: #ffebee;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.database-explorer {
+  margin-top: 20px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.tables-section {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.tables-list {
+  width: 25%;
+  border-right: 1px solid #dee2e6;
+  padding-right: 15px;
+}
+
+.tables-list h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.tables-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.table-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.table-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+}
+
+.table-name.active {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+.record-count {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-size: 12px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.truncate-btn {
+  margin-left: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.truncate-btn:hover {
+  opacity: 1;
+}
+
+.truncate-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.table-data {
+  flex: 1;
+}
+
+.table-data h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.data-table-container {
+  overflow-x: auto;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.data-table th {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.data-table td {
+  padding: 8px;
+  border-bottom: 1px solid #e9ecef;
+  white-space: nowrap;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.data-table tr:hover {
+  background-color: #f1f3f5;
+}
+
+.null-value {
+  color: #999;
+  font-style: italic;
+}
+
+.json-value {
+  color: #007bff;
+  cursor: help;
+}
+
+.select-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  border: 2px dashed #dee2e6;
+  border-radius: 6px;
+  color: #6c757d;
+}
+
+.loader {
+  text-align: center;
+  margin: 20px 0;
+  color: #6c757d;
+  font-style: italic;
+}

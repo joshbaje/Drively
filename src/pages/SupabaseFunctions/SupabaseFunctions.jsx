@@ -74,6 +74,11 @@ const SupabaseFunctions = () => {
       <div className="functions-header">
         <h1>Drivelyph Supabase Functions</h1>
         <p>Browse, view, and copy PostgreSQL functions for your Supabase project</p>
+        <div className="supabase-dashboard-link">
+          <a href="https://supabase.com/dashboard/project/iucmqwcznrsdubzeirgk/database/functions" target="_blank" rel="noopener noreferrer">
+            View implemented functions in Supabase Dashboard →
+          </a>
+        </div>
         <div className="functions-search-bar">
           <input
             type="text"

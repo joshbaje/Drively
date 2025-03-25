@@ -5,6 +5,7 @@ import './App.css';
 // Auth Context Provider
 import { AuthProvider } from './context/AuthContext';
 import { CompareProvider } from './context/CompareContext';
+import SyncAuthState from './components/auth/SyncAuthState';
 
 // Components
 import Navbar from './components/common/Navbar';
@@ -18,8 +19,9 @@ import SearchPage from './pages/SearchPage';
 import VehicleDetailsPage from './components/vehicle/VehicleDetailsPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
-import SupabaseConnectionTest from './components/SupabaseConnectionTest';
-import SupabaseLoginTest from './components/auth/SupabaseLoginTest';
+import UserVerification from './components/auth/UserVerification';
+import DirectLoginPage from './pages/DirectLoginPage';
+import TestUsersList from './components/auth/TestUsersList';
 import SupabaseFunctions from './pages/SupabaseFunctions/SupabaseFunctions';
 import ListVehiclePage from './pages/owner/ListVehiclePage';
 import ProfilePage from './pages/profile/ProfilePage';
@@ -28,6 +30,7 @@ import ConfirmationPage from './pages/booking/ConfirmationPage';
 import PaymentPage from './pages/payment/PaymentPage';
 import ComparePage from './pages/vehicle/ComparePage';
 import OwnerDashboard from './pages/owner/dashboard/OwnerDashboard';
+import AuthSyncPage from './pages/AuthSyncPage';
 
 // Admin Pages
 import AdminPage from './pages/admin/AdminPage';
@@ -40,6 +43,7 @@ function App() {
     <AuthProvider>
       <CompareProvider>
         <Router>
+          <SyncAuthState />
           <div className="app">
             {/* Main Routes with Navbar and Footer */}
             <Routes>
@@ -76,6 +80,9 @@ function App() {
                       <Route path="/compare" element={<ComparePage />} />
                       <Route path="/login" element={<LoginPage />} />
                       <Route path="/register" element={<RegisterPage />} />
+                      
+                      {/* Auth-related Routes */}
+                      <Route path="/auth-sync" element={<AuthSyncPage />} />
                       
                       {/* Owner Routes */}
                       <Route path="/list-your-car" element={
@@ -144,9 +151,10 @@ function App() {
                       } />
                       
                       {/* Supabase Routes */}
-                      <Route path="/supabase-test" element={<SupabaseConnectionTest />} />
-                      <Route path="/supabase-auth-test" element={<SupabaseLoginTest />} />
                       <Route path="/supabase-functions" element={<SupabaseFunctions />} />
+                      <Route path="/direct-login" element={<DirectLoginPage />} />
+                      <Route path="/verify-user" element={<UserVerification />} />
+                      <Route path="/test-users" element={<TestUsersList />} />
                       
                       {/* 404 Not Found */}
                       <Route path="*" element={
